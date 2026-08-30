@@ -24,6 +24,31 @@ class OllamaClient:
     def get_ollama_model_name(self, model_key: str) -> str:
         return MODEL_MAP.get(model_key, "spiderman:latest")
 
+    def prepare_payload(self, model_key: str, prompt: str, stream: bool = False) -> Dict[str, Any]:
+        ollama_model = self.get_ollama_model_name(model_key)
+        
+        if model_key == "spiderman":
+            # For fine-tuned model: use system instruction and prompt continuation to encourage full-paragraph responses
+            formatted_prompt = f"User: {prompt}\n\nAssistant: In detail, "
+            return {
+                "model": ollama_model,
+                "system": "You are a Spider-Man lore assistant. Provide a detailed, complete paragraph explaining background, origins, powers, and relationships in full detail.",
+                "prompt": formatted_prompt,
+                "options": {
+                    "temperature": 0.7,
+                    "top_p": 0.9,
+                    "presence_penalty": 0.6,
+                    "repeat_penalty": 1.15
+                },
+                "stream": stream
+            }
+        else:
+            return {
+                "model": ollama_model,
+                "prompt": prompt,
+                "stream": stream
+            }
+
     async def check_health(self) -> Tuple[bool, Dict[str, bool]]:
         models_available = {"spiderman": False, "base": False}
         try:
@@ -41,11 +66,8 @@ class OllamaClient:
 
     async def generate_single(self, model_key: str, prompt: str, timeout: float = 60.0) -> Tuple[str, int]:
         ollama_model = self.get_ollama_model_name(model_key)
-        payload = {
-            "model": ollama_model,
-            "prompt": prompt,
-            "stream": False
-        }
+        payload = self.prepare_payload(model_key, prompt, stream=False)
+        
         start_time = time.perf_counter()
         try:
             async with httpx.AsyncClient(timeout=timeout) as client:
@@ -61,7 +83,10 @@ class OllamaClient:
                     raise OllamaServiceError(f"Ollama returned HTTP status {res.status_code}", status_code=503)
 
                 data = res.json()
-                return data.get("response", ""), elapsed_ms
+                raw_response = data.get("response", "")
+                if model_key == "spiderman" and not raw_response.startswith("In detail"):
+                    raw_response = "In detail, " + raw_response
+                return raw_response, elapsed_ms
         except httpx.ConnectError:
             raise OllamaServiceError(
                 "Ollama service is unreachable at http://localhost:11434. Please ensure Ollama is running.",
@@ -71,7 +96,6 @@ class OllamaClient:
             raise OllamaServiceError("Model generation timed out (>60s).", status_code=504)
 
     async def generate_compare(self, prompt: str, timeout: float = 60.0) -> Dict[str, Any]:
-        # Query both fine-tuned and base models concurrently via asyncio.gather
         try:
             tuned_task = self.generate_single("spiderman", prompt, timeout=timeout)
             base_task = self.generate_single("base", prompt, timeout=timeout)
@@ -95,18 +119,18 @@ class OllamaClient:
 
     async def stream_single(self, model_key: str, prompt: str, timeout: float = 60.0) -> AsyncGenerator[str, None]:
         ollama_model = self.get_ollama_model_name(model_key)
-        payload = {
-            "model": ollama_model,
-            "prompt": prompt,
-            "stream": True
-        }
+        payload = self.prepare_payload(model_key, prompt, stream=True)
+
         try:
             async with httpx.AsyncClient(timeout=timeout) as client:
                 async with client.stream("POST", f"{self.base_url}/api/generate", json=payload) as response:
                     if response.status_code != 200:
                         yield f"data: {json.dumps({'error': f'Ollama returned status {response.status_code}'})}\n\n"
                         return
-                    
+
+                    if model_key == "spiderman":
+                        yield f"data: {json.dumps({'token': 'In detail, ', 'done': False})}\n\n"
+
                     async for line in response.aiter_lines():
                         if not line:
                             continue
