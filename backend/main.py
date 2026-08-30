@@ -80,6 +80,15 @@ async def get_health():
 
 
 from guardrail import is_spiderman_related, REFUSAL_MESSAGE
+from dialogues import (
+    is_greeting,
+    is_quotes_request,
+    get_random_greeting_response,
+    get_all_dialogues_formatted
+)
+
+
+BASE_GREETING_RESPONSE = "Hello! I'm a general-purpose AI assistant. How can I help you today?"
 
 
 @app.post("/api/chat")
@@ -88,11 +97,61 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
     if not request_data.message or not request_data.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty or whitespace.")
 
+    # 1. Greeting Handling (e.g. "Hi", "Hello", "Hey")
+    if is_greeting(request_data.message):
+        spidey_greeting = get_random_greeting_response()
+
+        if request_data.compare:
+            return ChatResponse(
+                tuned=spidey_greeting,
+                base=BASE_GREETING_RESPONSE,
+                latency_ms=LatencyMs(tuned=0, base=0)
+            )
+
+        accept_header = request.headers.get("accept", "")
+        if stream or "text/event-stream" in accept_header:
+            greeting_text = spidey_greeting if request_data.model == "spiderman" else BASE_GREETING_RESPONSE
+            async def stream_greeting():
+                yield f"data: {json.dumps({'token': greeting_text, 'done': True})}\n\n"
+            return StreamingResponse(stream_greeting(), media_type="text/event-stream")
+
+        if request_data.model == "spiderman":
+            return ChatResponse(
+                tuned=spidey_greeting,
+                base=None,
+                latency_ms=LatencyMs(tuned=0, base=None)
+            )
+        else:
+            return ChatResponse(
+                tuned=None,
+                base=BASE_GREETING_RESPONSE,
+                latency_ms=LatencyMs(tuned=None, base=0)
+            )
+
+    # 2. Quotes Request Handling (e.g. "Give me the best Spider-Man dialogues")
+    if is_quotes_request(request_data.message):
+        all_quotes_text = get_all_dialogues_formatted()
+
+        if request_data.compare:
+            base_text, base_ms = await ollama_client.generate_single("base", request_data.message)
+            return ChatResponse(
+                tuned=all_quotes_text,
+                base=base_text,
+                latency_ms=LatencyMs(tuned=0, base=base_ms)
+            )
+
+        if request_data.model == "spiderman":
+            return ChatResponse(
+                tuned=all_quotes_text,
+                base=None,
+                latency_ms=LatencyMs(tuned=0, base=None)
+            )
+
     # Convert history items to dict format if present
     history_list = [h.model_dump() for h in request_data.history] if request_data.history else None
     is_spidey_prompt = is_spiderman_related(request_data.message, history=history_list)
 
-    # 1. Comparison Mode
+    # 3. Comparison Mode
     if request_data.compare:
         if is_spidey_prompt:
             result = await ollama_client.generate_compare(request_data.message, history=history_list)

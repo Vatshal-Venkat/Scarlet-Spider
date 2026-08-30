@@ -39,7 +39,7 @@ class OllamaClient:
             turns.append(f"User: {prompt}")
             full_prompt = "\n\n".join(turns)
 
-        return {
+        payload = {
             "model": ollama_model,
             "prompt": full_prompt,
             "options": {
@@ -48,6 +48,11 @@ class OllamaClient:
             },
             "stream": stream
         }
+
+        if model_key == "base":
+            payload["system"] = "You are a helpful, friendly AI assistant."
+
+        return payload
 
     async def check_health(self) -> Tuple[bool, Dict[str, bool]]:
         models_available = {"spiderman": False, "base": False}
