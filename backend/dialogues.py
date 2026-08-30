@@ -195,10 +195,10 @@ SPIDERMAN_DIALOGUES: List[Dict[str, str]] = [
         "source": "The Amazing Spider-Man 1"
     },
     {
-        "quote": "I feel One Person can make a difference",
+        "quote": "I believe, One person can make a difference",
         "speaker": "Stan Lee",
-        "source": "Spider-Man Comics"
-    },
+        "source": "Spiderman Comics"
+    }
 ]
 
 # Greeting matching regex
@@ -232,11 +232,11 @@ def is_quotes_request(prompt: str) -> bool:
 def get_random_greeting_response() -> str:
     """
     Selects a random dialogue from the registry and formats the Spider-Man Assistant greeting:
-    '\"{quote}" — {speaker} in {source}. I'm your Spider-Man Assistant. You may ask me anything about Spider-Man!'
+    'Hey there! "{quote}" — {speaker} in {source}. I'm your Spider-Man Assistant. You may ask me anything about Spider-Man!'
     """
     item = random.choice(SPIDERMAN_DIALOGUES)
     return (
-        f"\"{item['quote']}\" — {item['speaker']} in {item['source']}.\n\n"
+        f"Hey there! \"{item['quote']}\" — {item['speaker']} in {item['source']}.\n\n"
         f"I'm your Spider-Man Assistant. You may ask me anything about Spider-Man!"
     )
 
