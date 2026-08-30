@@ -26,28 +26,15 @@ class OllamaClient:
 
     def prepare_payload(self, model_key: str, prompt: str, stream: bool = False) -> Dict[str, Any]:
         ollama_model = self.get_ollama_model_name(model_key)
-        
-        if model_key == "spiderman":
-            # For fine-tuned model: use system instruction and prompt continuation to encourage full-paragraph responses
-            formatted_prompt = f"User: {prompt}\n\nAssistant: In detail, "
-            return {
-                "model": ollama_model,
-                "system": "You are a Spider-Man lore assistant. Provide a detailed, complete paragraph explaining background, origins, powers, and relationships in full detail.",
-                "prompt": formatted_prompt,
-                "options": {
-                    "temperature": 0.7,
-                    "top_p": 0.9,
-                    "presence_penalty": 0.6,
-                    "repeat_penalty": 1.15
-                },
-                "stream": stream
-            }
-        else:
-            return {
-                "model": ollama_model,
-                "prompt": prompt,
-                "stream": stream
-            }
+        return {
+            "model": ollama_model,
+            "prompt": prompt,
+            "options": {
+                "temperature": 0.7,
+                "top_p": 0.9
+            },
+            "stream": stream
+        }
 
     async def check_health(self) -> Tuple[bool, Dict[str, bool]]:
         models_available = {"spiderman": False, "base": False}
@@ -84,8 +71,6 @@ class OllamaClient:
 
                 data = res.json()
                 raw_response = data.get("response", "")
-                if model_key == "spiderman" and not raw_response.startswith("In detail"):
-                    raw_response = "In detail, " + raw_response
                 return raw_response, elapsed_ms
         except httpx.ConnectError:
             raise OllamaServiceError(
@@ -128,8 +113,6 @@ class OllamaClient:
                         yield f"data: {json.dumps({'error': f'Ollama returned status {response.status_code}'})}\n\n"
                         return
 
-                    if model_key == "spiderman":
-                        yield f"data: {json.dumps({'token': 'In detail, ', 'done': False})}\n\n"
 
                     async for line in response.aiter_lines():
                         if not line:

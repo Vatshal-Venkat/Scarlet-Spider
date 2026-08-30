@@ -1,11 +1,16 @@
 import os
 import json
+import sys
 from pathlib import Path
 from fastapi import FastAPI, HTTPException, Request, status
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import ValidationError
+
+# Ensure backend directory is in sys.path for direct imports
+sys.path.insert(0, str(Path(__file__).parent))
 
 from models import ChatRequest, ChatResponse, LatencyMs, HealthResponse
 from ollama_client import OllamaClient, OllamaServiceError
@@ -42,12 +47,15 @@ async def ollama_service_error_handler(request: Request, exc: OllamaServiceError
     )
 
 
-@app.exception_handler(ValidationError)
-async def validation_error_handler(request: Request, exc: ValidationError):
+from fastapi.encoders import jsonable_encoder
+
+@app.exception_handler(RequestValidationError)
+async def validation_error_handler(request: Request, exc: RequestValidationError):
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
-        content={"detail": exc.errors()}
+        content={"detail": jsonable_encoder(exc.errors())}
     )
+
 
 
 @app.get("/api/health", response_model=HealthResponse)
@@ -71,25 +79,56 @@ async def get_health():
     return response_content
 
 
+from guardrail import is_spiderman_related, REFUSAL_MESSAGE
+
+
 @app.post("/api/chat")
 async def chat_endpoint(request_data: ChatRequest, request: Request, stream: bool = False):
     # Reject empty or whitespace-only messages per §6.1
     if not request_data.message or not request_data.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty or whitespace.")
 
-    # 1. Comparison Mode (Both fine-tuned and base models concurrently)
+    is_spidey_prompt = is_spiderman_related(request_data.message)
+
+    # 1. Comparison Mode
     if request_data.compare:
-        result = await ollama_client.generate_compare(request_data.message)
-        return ChatResponse(
-            tuned=result["tuned"],
-            base=result["base"],
-            latency_ms=LatencyMs(
-                tuned=result["latency_ms"]["tuned"],
-                base=result["latency_ms"]["base"]
+        if is_spidey_prompt:
+            result = await ollama_client.generate_compare(request_data.message)
+            return ChatResponse(
+                tuned=result["tuned"],
+                base=result["base"],
+                latency_ms=LatencyMs(
+                    tuned=result["latency_ms"]["tuned"],
+                    base=result["latency_ms"]["base"]
+                )
             )
+        else:
+            # Fine-tuned model refuses non-Spider-Man query; Untuned base model answers normally
+            base_text, base_ms = await ollama_client.generate_single("base", request_data.message)
+            return ChatResponse(
+                tuned=REFUSAL_MESSAGE,
+                base=base_text,
+                latency_ms=LatencyMs(
+                    tuned=0,
+                    base=base_ms
+                )
+            )
+
+    # 2. Single Model Mode: spiderman model gets guardrail refusal if out-of-domain
+    if request_data.model == "spiderman" and not is_spidey_prompt:
+        accept_header = request.headers.get("accept", "")
+        if stream or "text/event-stream" in accept_header:
+            async def stream_refusal():
+                yield f"data: {json.dumps({'token': REFUSAL_MESSAGE, 'done': True})}\n\n"
+            return StreamingResponse(stream_refusal(), media_type="text/event-stream")
+
+        return ChatResponse(
+            tuned=REFUSAL_MESSAGE,
+            base=None,
+            latency_ms=LatencyMs(tuned=0, base=None)
         )
 
-    # 2. SSE Streaming Mode for Single Model
+    # 3. Single Model Mode: normal execution for in-domain spiderman or base model queries
     accept_header = request.headers.get("accept", "")
     if stream or "text/event-stream" in accept_header:
         return StreamingResponse(
@@ -97,7 +136,6 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
             media_type="text/event-stream"
         )
 
-    # 3. Single Model Non-Streaming Mode
     resp_text, latency = await ollama_client.generate_single(request_data.model, request_data.message)
     if request_data.model == "spiderman":
         return ChatResponse(
