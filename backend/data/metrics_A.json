@@ -1,0 +1,14 @@
+{
+  "run": "A",
+  "r": 32,
+  "lr": 0.0002,
+  "train_rows": 257,
+  "baseline_eval_loss": 2.78320050239563,
+  "baseline_ppl": 16.170692556633536,
+  "best_eval_loss": 1.9295,
+  "best_ppl": 6.89,
+  "best_step": 20,
+  "total_steps": 68,
+  "trainable_params": 36864000,
+  "outcome": "Overfit at epoch 1 (train loss 0.033)"
+}

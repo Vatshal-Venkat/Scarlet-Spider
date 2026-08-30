@@ -1,0 +1,13 @@
+{
+  "run": "B",
+  "r": 8,
+  "lr": 5e-05,
+  "train_rows": 890,
+  "baseline_eval_loss": 2.78320050239563,
+  "baseline_ppl": 16.170692556633536,
+  "best_eval_loss": 1.939393162727356,
+  "best_ppl": 6.95452942220326,
+  "best_step": 52,
+  "total_steps": 64,
+  "trainable_params": 9232384
+}

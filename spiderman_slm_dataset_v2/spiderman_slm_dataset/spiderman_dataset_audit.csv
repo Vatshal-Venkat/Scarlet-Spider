@@ -1,0 +1,249 @@
+id,category,user,assistant
+1,comics,Is Venom a villain or an anti-hero?,"Venom has been Spider-Man's enemy, rival, anti-hero and uneasy ally depending on the continuity."
+2,comics,How would you describe Peter Parker?,Peter Parker is a science-minded New Yorker whose life combines ordinary responsibilities with his work as Spider-Man.
+3,comics,What was the budget of Spider-Man: No Way Home?,Spider-Man: No Way Home had a reported production budget of about $200 million.
+4,comics,Does Spider-Man work with Daredevil?,Daredevil and Spider-Man are fellow New York heroes who have worked together in many stories.
+5,comics,How important is Aunt May to Peter — explain briefly.,Aunt May is Peter's family anchor and one of the people most closely connected to his civilian life.
+6,comics,What is Spider-Man: Far From Home about?,Spider-Man: Far From Home follows Peter on a European trip while he faces a new threat involving Mysterio.
+7,comics,How does Peter Parker become Spider-Man?,Peter Parker becomes Spider-Man after being bitten by a radioactive or otherwise altered spider depending on the continuity.
+8,comics,How much did Across the Spider-Verse make worldwide?,Across the Spider-Verse earned about $690.8 million worldwide.
+9,comics,What happens in Spider-Man's first comic appearance?,"Amazing Fantasy #15 introduces Peter Parker, his spider bite, his new abilities, his early attempt to use them for personal gain, and the death of Uncle Ben that establishes his sense of responsibility."
+10,comics,Give me a concise explanation of Marvel's Spider-Man: Miles Morales.,Marvel's Spider-Man: Miles Morales is a follow-up game centered on Miles Morales and his life as Spider-Man.
+11,comics,What is Peter Parker's relationship with MJ?,"Peter Parker and Mary Jane Watson have one of Spider-Man's most important long-running relationships; they have been friends, romantic partners, and spouses in different continuity states."
+12,comics,What is Spider-Man's relationship with Iron Man?,"Peter Parker has a major relationship with Iron Man in the MCU, where Tony Stark becomes a mentor-like figure to Peter."
+13,comics,Tell me about the Lizard.,"The Lizard is commonly associated with Dr. Curt Connors, whose scientific work transforms him into a reptilian creature."
+14,comics,Give me a concise explanation of Spider-Man (2002) about.,Sam Raimi's Spider-Man (2002) stars Tobey Maguire as Peter Parker and follows his transformation into Spider-Man and conflict with Norman Osborn's Green Goblin.
+15,comics,When did Flash Thompson first appear?,Flash Thompson was introduced in Amazing Fantasy #15 as one of Peter Parker's classmates and a source of conflict in Peter's early life.
+16,comics,What was the budget of Spider-Man: Homecoming?,Spider-Man: Homecoming had a reported production budget of about $175 million in The Numbers database.
+17,comics,When did Aunt May first appear?,Aunt May first appeared alongside Peter Parker and Spider-Man in Amazing Fantasy #15.
+18,comics,What is Spider-Man 2 (2004) about?,Spider-Man 2 follows Peter Parker as he struggles with his personal life and responsibilities while facing Doctor Octopus.
+19,comics,What is Spider-Sense?,"Spider-Sense is Spider-Man's danger-detection ability, warning him about threats before they fully reach him."
+20,comics,What is Spider-Man: Brand New Day?,Spider-Man: Brand New Day is a 2026 live-action film directed by Destin Daniel Cretton and starring Tom Holland; Sony describes Peter as fighting crime full-time in a world that does not remember him.
+21,comics,What comic introduced Spider-Man?,"Spider-Man was introduced in Amazing Fantasy #15, the final issue of that series' 1962 run."
+22,comics,What year did Liz Allan first appear?,Liz Allan was introduced in Amazing Fantasy #15 as part of Peter Parker's high-school world.
+23,comics,Why are Spider-Man and Deadpool often paired?,"Spider-Man and Deadpool are a popular hero pairing in Marvel stories, often contrasting Peter's responsibility with Deadpool's chaotic humor."
+24,comics,Who is Black Cat?,"Felicia Hardy, Black Cat, is a recurring Spider-Man ally and romantic interest whose relationship with Peter is complicated."
+25,comics,What is Peter Parker's relationship with Harry Osborn?,Peter Parker and Harry Osborn are longtime friends whose relationship is strained by Norman Osborn's Green Goblin identity and Harry's own struggles.
+26,comics,What is Marvel's Spider-Man: Miles Morales?,Marvel's Spider-Man: Miles Morales is a follow-up game centered on Miles Morales and his life as Spider-Man.
+27,comics,What is the relationship between MJ and Harry?,"Mary Jane and Harry have been friends and romantic partners at different points, but MJ's strongest long-term romantic connection is with Peter."
+28,comics,What was the budget of The Amazing Spider-Man 2?,The Amazing Spider-Man 2 (2014) had a reported production budget of about $200 million.
+29,comics,Who is Carnage?,"Carnage is a violent symbiote-linked antagonist, most commonly associated with Cletus Kasady."
+30,comics,What is The Amazing Spider-Man 2 about?,The Amazing Spider-Man 2 features Peter facing Electro while Harry Osborn returns and the story expands the OsCorp conflict.
+31,comics,Tell me about Venom.,"Venom is a symbiote-based character whose relationship to Spider-Man varies between enemy, anti-hero, and uneasy ally depending on the story."
+32,comics,How much did Spider-Man 2 make worldwide?,Spider-Man 2 (2004) earned about $797.0 million worldwide according to The Numbers.
+33,comics,How does Uncle Ben influence Peter — explain briefly.,Uncle Ben's death and moral example are foundational to Peter's understanding of responsibility.
+34,comics,What is Peter Parker's official blood type?,"If the requested continuity/source does not establish a blood type, the correct response is that it is not established rather than guessing."
+35,comics,How should the model distinguish confirmed Spider-Man projects from rumors — explain briefly.,"The model should distinguish officially announced projects from rumors, leaks or fan theories."
+36,comics,When did Spider-Man first appear?,"Spider-Man first appeared in Amazing Fantasy #15, published in August 1962."
+37,comics,What should the Spider-Man AI do when it does not know a fact?,"If a Spider-Man detail is not established by the source or continuity being discussed, the model should say that it is unknown or not established instead of inventing a fact."
+38,comics,How much did Spider-Man: Homecoming make worldwide?,Spider-Man: Homecoming earned about $878.9 million worldwide according to The Numbers.
+39,comics,What is Spider-Man's relationship with the Avengers?,"Spider-Man has been affiliated with the Avengers at various points in Marvel Comics, connecting him to heroes such as Captain America and Iron Man."
+40,comics,Tell me about Rhino.,"Rhino is a physically powerful Spider-Man enemy known for a heavily armored, rhinoceros-like form."
+41,comics,Tell me about Hobgoblin.,"Hobgoblin is a villain identity used by multiple characters in Spider-Man stories, most famously involving Roderick Kingsley."
+42,comics,Why does Spider-Man have a secret identity?,"Peter Parker traditionally maintains a secret identity to protect himself and people close to him, although some stories change who knows it."
+43,comics,Is Spider-Man an Avenger?,"Spider-Man has been associated with the Avengers at various points in Marvel Comics, connecting him to a wider superhero community."
+44,comics,When did The Amazing Spider-Man begin?,"The Amazing Spider-Man began with issue #1 in March 1963, following Spider-Man's debut in Amazing Fantasy #15."
+45,comics,Give me a concise explanation of Peter Parker's relationship with Gwen Stacy.,"Gwen Stacy is one of Peter Parker's major early romantic relationships, and her death has a lasting effect on Peter in classic comics."
+46,comics,Who published Marvel's Spider-Man 2?,Marvel's Spider-Man 2 was published by Sony Interactive Entertainment.
+47,comics,What is the Spider-Verse?,The Spider-Verse concept allows multiple Spider-People and alternate realities to coexist.
+48,comics,Tell me about Ganke Lee.,Ganke Lee is Miles Morales's close friend and an important ally who helps him protect his secret identity in the comics.
+49,comics,Which companies are associated with Brand New Day's production?,"Sony lists Columbia Pictures as a Sony company and Marvel Studios as associated with Spider-Man: Brand New Day; The Numbers lists Marvel Studios, Columbia Pictures, Pascal Pictures and Sony Pictures among production/financing companies."
+50,comics,Is Spider-Man only Peter Parker in the comics?,"No. Peter Parker is the primary Spider-Man, but other characters including Miles Morales have carried the Spider-Man identity in different continuities."
+51,comics,Give me a concise explanation of Spider-Man 2 (2004) about.,Spider-Man 2 follows Peter Parker as he struggles with his personal life and responsibilities while facing Doctor Octopus.
+52,comics,What era did Spider-Man debut in?,Spider-Man debuted during the Silver Age of American comic books in 1962.
+53,comics,Who is Mary Jane Watson?,Mary Jane Watson is one of Peter Parker's closest relationships and a major recurring character in Spider-Man stories.
+54,comics,When did the Lizard first appear?,"The Lizard, associated with Dr. Curt Connors, first appeared in The Amazing Spider-Man #6 in 1963."
+55,comics,Give me a concise explanation of Marvel's Spider-Man 2.,Marvel's Spider-Man 2 is a 2023 PS5 action-adventure game featuring both Peter Parker and Miles Morales.
+56,comics,What budget is listed for Spider-Man: Brand New Day?,The Numbers currently lists Spider-Man: Brand New Day with a production budget of about $225 million.
+57,comics,Which issue contains Spider-Man's first appearance?,"Spider-Man was introduced in Amazing Fantasy #15, the final issue of that series' 1962 run."
+58,comics,What is Peter Parker's officially confirmed favorite food?,There is no single universally established official answer across Spider-Man continuities. The AI should not invent one.
+59,comics,Tell me about Kraven the Hunter.,Kraven is a hunter who views Spider-Man as a premier challenge and has repeatedly pursued him.
+60,comics,How should a Spider-Man AI handle rumors about future projects — explain briefly.,"Future Spider-Man projects can change release dates, casts, plots and production details; training data should label rumors separately from confirmed information."
+61,comics,What is Spider-Man: No Way Home about?,Spider-Man: No Way Home centers on Peter's attempt to solve a multiversal crisis after a spell causes villains from other Spider-Man realities to enter his world.
+62,comics,Give me a concise explanation of the relationship between MJ and Harry.,"Mary Jane and Harry have been friends and romantic partners at different points, but MJ's strongest long-term romantic connection is with Peter."
+63,comics,Who wrote Spider-Man: Brand New Day?,Spider-Man: Brand New Day is written by Chris McKenna and Erik Sommers.
+64,comics,Why does Kraven hunt Spider-Man?,Kraven the Hunter views Spider-Man as an exceptional quarry and repeatedly seeks to prove his superiority by hunting him.
+65,comics,Give me a concise explanation of Peter's relationship with Ned in the MCU.,The Peter-Ned relationship varies by adaptation; in the MCU films Ned Leeds is Peter's close friend and confidant.
+66,comics,What did Steve Ditko contribute to Spider-Man?,Steve Ditko was the artist and penciller associated with Spider-Man's creation and first appearance and was a major creative force in the character's early comic run.
+67,comics,Does Spider-Man interact with the Fantastic Four Give me the context.,"Spider-Man has longstanding relationships with members of the Fantastic Four, especially Johnny Storm."
+68,comics,Who is Peter Parker?,Peter Parker is the character most commonly associated with the Spider-Man identity in Marvel Comics.
+69,comics,Who is Aunt May?,Aunt May is Peter Parker's aunt and one of the central family figures in his life.
+70,comics,Who is Ned Leeds?,Ned Leeds is a Spider-Man-associated character whose identity and characterization vary substantially between comics and film adaptations.
+71,comics,What was the budget of Into the Spider-Verse?,Into the Spider-Verse had a reported production budget of about $90 million.
+72,comics,What comic information should a Spider-Man fine-tuning dataset contain?,"A strong comic dataset should include publication history, creators, first appearances, character biographies, powers, relationships, villains, allies, major story arcs, alternate universes and continuity distinctions."
+73,comics,Does Spider-Man work with Captain America?,Spider-Man has fought alongside Captain America in Marvel stories and has interacted with him as a fellow hero.
+74,comics,Who was Spider-Man's first major comic villain?,"The Chameleon is the first costumed supervillain Spider-Man fights in The Amazing Spider-Man #1, following his origin in Amazing Fantasy #15."
+75,comics,Who is Spider-Man?,"Spider-Man is the superhero identity primarily associated with Peter Parker, although many other characters have carried the mantle."
+76,comics,Who is Harry Osborn?,Harry Osborn is Peter Parker's longtime friend and the son of Norman Osborn; his relationship with Peter becomes complicated by his father's identity as Green Goblin.
+77,comics,When did Miles Morales first appear?,"Miles Morales first appeared in Ultimate Fallout #4 in 2011, initially in Marvel's Ultimate Universe."
+78,comics,Which major villains appear in Marvel's Spider-Man 2?,"Marvel's Spider-Man 2 features Venom, Kraven the Hunter, Lizard and other villains."
+79,comics,Tell me about Doctor Octopus.,"Doctor Octopus, usually Otto Octavius, is a brilliant scientist who becomes one of Spider-Man's most persistent enemies."
+80,comics,Why is Uncle Ben important in Spider-Man comics?,Uncle Ben's death is a defining event in Peter Parker's origin and becomes a central reason Peter chooses to use his powers responsibly.
+81,comics,How much did The Amazing Spider-Man make worldwide?,The Amazing Spider-Man (2012) earned about $758.6 million worldwide according to The Numbers.
+82,comics,What studio is strongly associated with Spider-Man films?,Sony Pictures is the studio behind the Columbia Pictures Spider-Man film franchise.
+83,comics,Tell me about Spider-Man's friendship with Human Torch like.,"Johnny Storm, the Human Torch, is one of Spider-Man's closest superhero friends and frequent friendly rivals."
+84,comics,Who developed Marvel's Spider-Man 2?,Marvel's Spider-Man 2 was developed by Insomniac Games.
+85,comics,What is Peter Parker's main comic continuity?,"Peter Parker's primary Marvel Comics continuity is generally identified as Earth-616, although Spider-Man also appears in many alternate universes."
+86,comics,Can you play as both Peter and Miles in Spider-Man 2?,Marvel's Spider-Man 2 lets players switch between Peter Parker and Miles Morales.
+87,comics,Give me a concise explanation of Spider-Sense.,"Spider-Sense is Spider-Man's danger-detection ability, warning him about threats before they fully reach him."
+88,comics,Who plays Spider-Man in the MCU films?,Tom Holland plays Peter Parker/Spider-Man in the MCU Spider-Man films and in Brand New Day.
+89,comics,How important is Aunt May to Peter?,Aunt May is Peter's family anchor and one of the people most closely connected to his civilian life.
+90,comics,When did Doctor Octopus first appear?,"Doctor Octopus, Otto Octavius, first appeared in The Amazing Spider-Man #3 in 1963."
+91,comics,Why is Amazing Fantasy #15 important?,Amazing Fantasy #15 is historically important because it contains Spider-Man's first published appearance and origin story.
+92,comics,Who is J. Jonah Jameson?,J. Jonah Jameson is a longtime Spider-Man supporting character and a frequent critic of Spider-Man in many versions of the story.
+93,comics,Who is Jon Bernthal playing in Brand New Day?,Jon Bernthal is listed in the cast of Spider-Man: Brand New Day as Frank Castle/Punisher in the film's announced cast.
+94,comics,What is the central moral idea behind Spider-Man?,Spider-Man stories repeatedly connect Peter's powers to a strong sense of responsibility toward other people.
+95,comics,Who is Green Goblin?,Green Goblin is one of Spider-Man's most important enemies and is strongly associated with Norman Osborn.
+96,comics,Who played Spider-Man in the original Raimi trilogy?,Tobey Maguire played Peter Parker/Spider-Man in Sam Raimi's Spider-Man trilogy.
+97,comics,What is the Spider-Verse in comics?,Spider-Verse is a Marvel concept involving multiple Spider-People from different realities and has become a major part of Spider-Man's multiverse stories.
+98,comics,Give me a concise explanation of the Spider-Verse.,The Spider-Verse concept allows multiple Spider-People and alternate realities to coexist.
+99,comics,Who is Rhino?,"Rhino is a physically powerful Spider-Man enemy known for a heavily armored, rhinoceros-like form."
+100,comics,When did the Green Goblin first appear?,The Green Goblin first appeared in The Amazing Spider-Man #14 in 1964.
+101,comics,Can Spider-Man climb walls?,Spider-Man can adhere to and move across walls and other surfaces.
+102,comics,When did Uncle Ben first appear?,"Uncle Ben first appeared in Amazing Fantasy #15, where his death becomes a foundational event in Peter Parker's origin."
+103,comics,What year did Sandman first appear?,"Sandman, Flint Marko, first appeared in The Amazing Spider-Man #4 in 1963."
+104,comics,Give me a concise explanation of the next Spider-Verse movie listed after Across the Spider-Verse.,"The Numbers franchise listing currently places Spider-Man: Beyond the Spider-Verse on June 17, 2027, but this should be treated as a current listing rather than an immutable fact."
+105,comics,Who is Spider-Gwen?,"Spider-Gwen, commonly associated with Gwen Stacy from an alternate reality, is a Spider-powered hero from a different universe than Peter Parker's main continuity."
+106,comics,Which studio developed the modern Spider-Man PlayStation games?,Insomniac Games developed the modern Marvel's Spider-Man game series for PlayStation.
+107,comics,Is Black Cat an ally or enemy of Spider-Man?,"Black Cat is both an ally and an occasional romantic interest for Peter Parker, making their partnership complicated."
+108,comics,Who is Doctor Octopus?,"Doctor Octopus, usually Otto Octavius, is a brilliant scientist who becomes one of Spider-Man's most persistent enemies."
+109,comics,Tell me about Vulture.,Vulture is a recurring Spider-Man villain associated with Adrian Toomes and advanced flight technology.
+110,comics,What is Spider-Man (2002) about?,Sam Raimi's Spider-Man (2002) stars Tobey Maguire as Peter Parker and follows his transformation into Spider-Man and conflict with Norman Osborn's Green Goblin.
+111,comics,Where is Marvel's Spider-Man 2 set?,Marvel's Spider-Man 2 expands its version of Marvel's New York to include areas such as Brooklyn and Queens.
+112,comics,Is Miles Morales exactly the same character in every Spider-Man movie and comic?,"No. Miles exists in different continuities and adaptations, so details about his origin, relationships and powers can differ."
+113,comics,Did Jack Kirby create Spider-Man alone?,"No. Marvel's published credits for Amazing Fantasy #15 list Stan Lee as writer and Steve Ditko as penciller. Kirby was involved in early Spider-Man development and cover history, but he is not credited as the story's writer or penciller in that issue."
+114,comics,What was the budget of Across the Spider-Verse?,Across the Spider-Verse had a reported production budget of about $100 million.
+115,comics,How should the model distinguish confirmed Spider-Man projects from rumors?,"The model should distinguish officially announced projects from rumors, leaks or fan theories."
+116,comics,Give me a concise explanation of the premise of Brand New Day.,"Sony's official synopsis says Peter is fighting crime full-time in a world that does not remember him, while a new unseen threat emerges."
+117,comics,Why should the Spider-Man AI mention continuity?,"When answering a question that could refer to comics, MCU films, Sony films, animation or games, the model should identify the relevant continuity."
+118,comics,Give me a concise explanation of the central moral idea behind Spider-Man.,Spider-Man stories repeatedly connect Peter's powers to a strong sense of responsibility toward other people.
+119,comics,What is the premise of Brand New Day?,"Sony's official synopsis says Peter is fighting crime full-time in a world that does not remember him, while a new unseen threat emerges."
+120,comics,Who is Kaine Parker?,Kaine Parker is a clone of Peter Parker who becomes the anti-hero known as Scarlet Spider.
+121,comics,How are Peter Parker and Miles Morales connected — explain briefly.,"Peter Parker and Miles Morales can operate as a Spider-Man partnership, with Peter often serving as a mentor or older-brother figure to Miles."
+122,comics,How should a Spider-Man AI handle rumors about future projects?,"Future Spider-Man projects can change release dates, casts, plots and production details; training data should label rumors separately from confirmed information."
+123,comics,Who is Kraven the Hunter?,Kraven is a hunter who views Spider-Man as a premier challenge and has repeatedly pursued him.
+124,comics,Who is Mysterio?,"Mysterio is a master of illusion and deception, commonly associated with Quentin Beck."
+125,comics,Tell me about Peter Parker.,Peter Parker is the character most commonly associated with the Spider-Man identity in Marvel Comics.
+126,comics,What year did the Green Goblin first appear?,The Green Goblin first appeared in The Amazing Spider-Man #14 in 1964.
+127,comics,Why do Spider-Man and Daredevil work well together?,Spider-Man and Daredevil share a strong New York superhero connection and have teamed up repeatedly.
+128,comics,Who is Gwen Stacy to Peter Parker?,Gwen Stacy is an important character in Peter Parker's history and one of his major early romantic relationships in the comics.
+129,comics,What was the budget of Spider-Man (2002)?,Spider-Man (2002) had a reported production budget of about $139 million in The Numbers database.
+130,comics,How would you describe Peter Parker — explain briefly.,Peter Parker is a science-minded New Yorker whose life combines ordinary responsibilities with his work as Spider-Man.
+131,comics,Give me a concise explanation of Spider-Man 3 about.,"Spider-Man 3 continues the Tobey Maguire series with Peter facing multiple threats including Sandman, Venom, and a new Green Goblin."
+132,comics,What year did Flash Thompson first appear?,Flash Thompson was introduced in Amazing Fantasy #15 as one of Peter Parker's classmates and a source of conflict in Peter's early life.
+133,comics,Give me a concise explanation of Spider-Man: No Way Home about.,Spider-Man: No Way Home centers on Peter's attempt to solve a multiversal crisis after a spell causes villains from other Spider-Man realities to enter his world.
+134,comics,Tell me about Kingpin.,"Kingpin, Wilson Fisk, is a major crime boss who has repeatedly conflicted with Spider-Man and other Marvel heroes."
+135,comics,What year did Uncle Ben first appear?,"Uncle Ben first appeared in Amazing Fantasy #15, where his death becomes a foundational event in Peter Parker's origin."
+136,comics,What is the major live-action Spider-Man project in 2026?,"As of August 28, 2026, Sony lists Spider-Man: Brand New Day as a 2026 film starring Tom Holland, directed by Destin Daniel Cretton."
+137,comics,Who is Electro?,"Electro is a Spider-Man villain associated with electrical powers and, in the comics, with Max Dillon."
+138,comics,When did Electro first appear?,"Electro, associated with Max Dillon, first appeared in The Amazing Spider-Man #9 in 1964."
+139,comics,Who is Ben Reilly?,Ben Reilly is a clone of Peter Parker who becomes a major Spider-Man character and has also operated as Spider-Man in Marvel Comics.
+140,comics,How much did Spider-Man (2002) make worldwide?,Spider-Man (2002) earned about $823.9 million worldwide according to The Numbers.
+141,comics,What is Columbia Pictures' connection to Spider-Man?,"Columbia Pictures, a Sony company, is the film label associated with the Spider-Man movie franchise."
+142,comics,Why is Ned Leeds different in the MCU compared with some comic stories?,"Adaptations can substantially reinterpret characters. The MCU's Ned is Peter's close friend and differs from several comic portrayals, so the answer should specify the continuity."
+143,comics,Does Spider-Man team up with Deadpool?,Spider-Man and Deadpool are frequently paired in Marvel stories and have a relationship built around contrasting personalities and humor.
+144,comics,What was the budget of Spider-Man: Far From Home?,Spider-Man: Far From Home had a reported production budget of about $160 million.
+145,comics,How does Mysterio fight Spider-Man?,"Mysterio typically relies on illusions, deception, technology and psychological manipulation rather than raw superhuman strength."
+146,comics,What year did The Amazing Spider-Man begin?,"The Amazing Spider-Man began with issue #1 in March 1963, following Spider-Man's debut in Amazing Fantasy #15."
+147,comics,Who is in the cast of Spider-Man: Brand New Day?,"The announced cast includes Tom Holland, Zendaya, Sadie Sink, Jacob Batalon, Jon Bernthal, Tramell Tillman, Michael Mando and Mark Ruffalo."
+148,comics,Tell me about Mary Jane Watson.,Mary Jane Watson is one of Peter Parker's closest relationships and a major recurring character in Spider-Man stories.
+149,comics,When did Sandman first appear?,"Sandman, Flint Marko, first appeared in The Amazing Spider-Man #4 in 1963."
+150,comics,Tell me about Miles Morales.,Miles Morales is another major Spider-Man who originated in an alternate universe and later became part of the main Marvel continuity.
+151,comics,What is Pascal Pictures' connection to Brand New Day?,Pascal Pictures is listed among the production/financing companies for Spider-Man: Brand New Day.
+152,comics,Who is Ganke Lee?,Ganke Lee is Miles Morales's close friend and an important ally who helps him protect his secret identity in the comics.
+153,comics,What is Peter Parker's relationship with Gwen Stacy?,"Gwen Stacy is one of Peter Parker's major early romantic relationships, and her death has a lasting effect on Peter in classic comics."
+154,comics,What year did Miles Morales first appear?,"Miles Morales first appeared in Ultimate Fallout #4 in 2011, initially in Marvel's Ultimate Universe."
+155,comics,What year did Doctor Octopus first appear?,"Doctor Octopus, Otto Octavius, first appeared in The Amazing Spider-Man #3 in 1963."
+156,comics,Is Spider-Man only Peter Parker?,"Miles Morales is one of the characters who carries the Spider-Man identity, demonstrating that Spider-Man is a mantle as well as a specific character."
+157,comics,What is The Amazing Spider-Man (2012) about?,The Amazing Spider-Man stars Andrew Garfield as Peter Parker and centers on his investigation into his parents and Dr. Curt Connors.
+158,comics,Has Spider-Man teamed up with Ms. Marvel?,"Kamala Khan has teamed up with Spider-Man in Marvel stories, including conflicts involving major supernatural and superhuman threats."
+159,comics,How are Peter Parker and Miles Morales connected?,"Peter Parker and Miles Morales can operate as a Spider-Man partnership, with Peter often serving as a mentor or older-brother figure to Miles."
+160,comics,How strong is Spider-Man?,Spider-Man possesses superhuman physical strength that is substantially beyond a normal human's capabilities.
+161,comics,Give me a concise explanation of Peter Parker's relationship with Harry Osborn.,Peter Parker and Harry Osborn are longtime friends whose relationship is strained by Norman Osborn's Green Goblin identity and Harry's own struggles.
+162,comics,Does Spider-Man heal quickly Give me the context.,"Spider-Man versions often have enhanced recovery, but the exact extent varies by continuity."
+163,comics,Who plays MJ in the MCU Spider-Man films?,Zendaya plays MJ in the MCU Spider-Man films.
+164,comics,Does Spider-Man work with Captain America Give me the context.,Spider-Man has fought alongside Captain America in Marvel stories and has interacted with him as a fellow hero.
+165,comics,Give me a concise explanation of The Amazing Spider-Man (2012) about.,The Amazing Spider-Man stars Andrew Garfield as Peter Parker and centers on his investigation into his parents and Dr. Curt Connors.
+166,comics,What is Into the Spider-Verse about?,Into the Spider-Verse introduces Miles Morales and explores a multiverse containing multiple Spider-People.
+167,comics,What is Peter's relationship with Ned in the MCU?,The Peter-Ned relationship varies by adaptation; in the MCU films Ned Leeds is Peter's close friend and confidant.
+168,comics,What did Stan Lee contribute to Spider-Man?,Stan Lee wrote the first Spider-Man story and was the writer-editor credited alongside Steve Ditko for the character's creation.
+169,comics,Who created Spider-Man?,Spider-Man was created by writer Stan Lee and artist Steve Ditko. Marvel credits Lee as writer and Ditko as penciller on Amazing Fantasy #15.
+170,comics,Give me a concise explanation of Spider-Man's relationship with Iron Man.,"Peter Parker has a major relationship with Iron Man in the MCU, where Tony Stark becomes a mentor-like figure to Peter."
+171,comics,Who is Black Cat in Spider-Man comics?,"Black Cat is Felicia Hardy, a skilled thief and recurring Spider-Man ally and romantic interest whose relationship with Peter is complicated."
+172,comics,Are Peter Parker and Miles Morales partners?,Peter and Miles share the Spider-Man mantle in some continuities and can work together as partners.
+173,comics,Give me a concise explanation of Spider-Man: Far From Home about.,Spider-Man: Far From Home follows Peter on a European trip while he faces a new threat involving Mysterio.
+174,comics,How does Peter Parker become Spider-Man — explain briefly.,Peter Parker becomes Spider-Man after being bitten by a radioactive or otherwise altered spider depending on the continuity.
+175,comics,Who is Hobgoblin?,"Hobgoblin is a villain identity used by multiple characters in Spider-Man stories, most famously involving Roderick Kingsley."
+176,comics,Does Spider-Man team up with Deadpool Give me the context.,Spider-Man and Deadpool are frequently paired in Marvel stories and have a relationship built around contrasting personalities and humor.
+177,comics,Tell me about Gwen Stacy to Peter Parker.,Gwen Stacy is an important character in Peter Parker's history and one of his major early romantic relationships in the comics.
+178,comics,Give me a concise explanation of Spider-Man's relationship with the Avengers.,"Spider-Man has been affiliated with the Avengers at various points in Marvel Comics, connecting him to heroes such as Captain America and Iron Man."
+179,comics,Why can Spider-Man facts sometimes conflict?,"Spider-Man continuity differs across comics, movies, television, games and alternate universes, so an answer should specify the version when necessary."
+180,comics,Who plays Ned Leeds?,Jacob Batalon plays Ned Leeds in the MCU Spider-Man films.
+181,comics,Does Spider-Man interact with the Fantastic Four?,"Spider-Man has longstanding relationships with members of the Fantastic Four, especially Johnny Storm."
+182,comics,Has Spider-Man worked with Wolverine?,Spider-Man and Wolverine have worked together as Marvel heroes and have shared team affiliations and adventures.
+183,comics,What role does Marvel Studios have in Spider-Man films?,Marvel Studios is a key production partner on the MCU Spider-Man films and is listed with Brand New Day.
+184,comics,Tell me about Green Goblin.,Green Goblin is one of Spider-Man's most important enemies and is strongly associated with Norman Osborn.
+185,comics,Give me a concise explanation of Spider-Man: Brand New Day.,Spider-Man: Brand New Day is a 2026 live-action film directed by Destin Daniel Cretton and starring Tom Holland; Sony describes Peter as fighting crime full-time in a world that does not remember him.
+186,comics,Does Spider-Man work with Daredevil Give me the context.,Daredevil and Spider-Man are fellow New York heroes who have worked together in many stories.
+187,comics,What was the budget of Spider-Man 2?,Spider-Man 2 (2004) had a reported production budget of about $200 million.
+188,comics,What is Marvel's Spider-Man 2?,Marvel's Spider-Man 2 is a 2023 PS5 action-adventure game featuring both Peter Parker and Miles Morales.
+189,comics,Give me a concise explanation of Into the Spider-Verse about.,Into the Spider-Verse introduces Miles Morales and explores a multiverse containing multiple Spider-People.
+190,comics,What was the budget of The Amazing Spider-Man?,The Amazing Spider-Man (2012) had a reported production budget of about $220 million.
+191,comics,Tell me about Ned Leeds.,Ned Leeds is a Spider-Man-associated character whose identity and characterization vary substantially between comics and film adaptations.
+192,comics,What is Spider-Man: Homecoming about?,Spider-Man: Homecoming stars Tom Holland and follows Peter Parker balancing high school with superhero responsibilities under the broader MCU setting.
+193,comics,Who is Silk?,"Silk is the superhero identity of Cindy Moon, a character connected to Spider-Man through the broader spider-powered mythology."
+194,comics,What is Across the Spider-Verse about?,Across the Spider-Verse follows Miles Morales as he encounters a larger network of Spider-People across the multiverse.
+195,comics,Is a rumored Spider-Man casting announcement confirmed?,Not necessarily. A rumor should be labeled as a rumor unless it is supported by an official announcement or reliable current reporting.
+196,comics,How does Uncle Ben influence Peter?,Uncle Ben's death and moral example are foundational to Peter's understanding of responsibility.
+197,comics,Give me a concise explanation of The Amazing Spider-Man 2 about.,The Amazing Spider-Man 2 features Peter facing Electro while Harry Osborn returns and the story expands the OsCorp conflict.
+198,comics,What year did Spider-Man make his comic debut?,"Spider-Man first appeared in Amazing Fantasy #15, published in August 1962."
+199,comics,What year did Aunt May first appear?,Aunt May first appeared alongside Peter Parker and Spider-Man in Amazing Fantasy #15.
+200,comics,Who is Miles Morales?,Miles Morales is another major Spider-Man who originated in an alternate universe and later became part of the main Marvel continuity.
+201,comics,Give me a concise explanation of Spider-Man: Homecoming about.,Spider-Man: Homecoming stars Tom Holland and follows Peter Parker balancing high school with superhero responsibilities under the broader MCU setting.
+202,comics,Is Kingpin a Spider-Man villain?,"Yes. Wilson Fisk, the Kingpin, is a major crime boss who has repeatedly opposed Spider-Man and other New York heroes."
+203,comics,Give me a concise explanation of Peter Parker's relationship with MJ.,"Peter Parker and Mary Jane Watson have one of Spider-Man's most important long-running relationships; they have been friends, romantic partners, and spouses in different continuity states."
+204,comics,When did Liz Allan first appear?,Liz Allan was introduced in Amazing Fantasy #15 as part of Peter Parker's high-school world.
+205,comics,How strong is Spider-Man — explain briefly.,Spider-Man possesses superhuman physical strength that is substantially beyond a normal human's capabilities.
+206,comics,What happened after Spider-Man's debut?,"After his debut in Amazing Fantasy #15, Spider-Man received his own ongoing series, The Amazing Spider-Man, beginning in 1963."
+207,comics,Who is the main Spider-Man in Marvel's Spider-Man?,Marvel's Spider-Man presents an experienced Peter Parker as its main playable Spider-Man.
+208,comics,Tell me about Spider-Man.,"Spider-Man is the superhero identity primarily associated with Peter Parker, although many other characters have carried the mantle."
+209,comics,Why was Spider-Man different from many earlier superheroes?,"Spider-Man was presented as a teenager dealing with school, money, family and social problems while also being a superhero, rather than simply functioning as an adult hero's sidekick."
+210,comics,Give me a concise explanation of the major live-action Spider-Man project in 2026.,"As of August 28, 2026, Sony lists Spider-Man: Brand New Day as a 2026 film starring Tom Holland, directed by Destin Daniel Cretton."
+211,comics,Who directed Spider-Man: Brand New Day?,Spider-Man: Brand New Day is directed by Destin Daniel Cretton.
+212,comics,What is Spider-Man's core comic-book theme?,Responsibility is one of Spider-Man's defining themes: Peter's powers are repeatedly connected to the idea that having power creates an obligation to help others.
+213,comics,What is the next Spider-Verse movie listed after Across the Spider-Verse?,"The Numbers franchise listing currently places Spider-Man: Beyond the Spider-Verse on June 17, 2027, but this should be treated as a current listing rather than an immutable fact."
+214,comics,Tell me about Harry Osborn.,Harry Osborn is Peter Parker's longtime friend and the son of Norman Osborn; his relationship with Peter becomes complicated by his father's identity as Green Goblin.
+215,comics,What is Marvel's Spider-Man (2018) game?,Marvel's Spider-Man is an action-adventure game developed by Insomniac Games and published by Sony Interactive Entertainment.
+216,comics,What are Spider-Man's web-shooters?,Peter Parker commonly uses web-shooters as technology for launching and manipulating web fluid.
+217,comics,What makes Spider-Man so agile?,Spider-Man has enhanced agility and reflexes that support his acrobatic fighting and movement.
+218,comics,Who are the creators of Spider-Man?,Spider-Man was created by writer Stan Lee and artist Steve Ditko. Marvel credits Lee as writer and Ditko as penciller on Amazing Fantasy #15.
+219,comics,How much did No Way Home make worldwide?,Spider-Man: No Way Home earned about $1.921 billion worldwide according to The Numbers.
+220,comics,Tell me about Electro.,"Electro is a Spider-Man villain associated with electrical powers and, in the comics, with Max Dillon."
+221,comics,Tell me about in the cast of Spider-Man: Brand New Day.,"The announced cast includes Tom Holland, Zendaya, Sadie Sink, Jacob Batalon, Jon Bernthal, Tramell Tillman, Michael Mando and Mark Ruffalo."
+222,comics,Tell me about Mysterio.,"Mysterio is a master of illusion and deception, commonly associated with Quentin Beck."
+223,comics,Give me a concise explanation of Across the Spider-Verse about.,Across the Spider-Verse follows Miles Morales as he encounters a larger network of Spider-People across the multiverse.
+224,comics,What year did Electro first appear?,"Electro, associated with Max Dillon, first appeared in The Amazing Spider-Man #9 in 1964."
+225,comics,Tell me about Aunt May.,Aunt May is Peter Parker's aunt and one of the central family figures in his life.
+226,comics,Tell me about the main Spider-Man in Marvel's Spider-Man.,Marvel's Spider-Man presents an experienced Peter Parker as its main playable Spider-Man.
+227,comics,Who is Vulture?,Vulture is a recurring Spider-Man villain associated with Adrian Toomes and advanced flight technology.
+228,comics,How much did The Amazing Spider-Man 2 make worldwide?,The Amazing Spider-Man 2 (2014) earned about $709.7 million worldwide according to The Numbers.
+229,comics,Who is the Lizard?,"The Lizard is commonly associated with Dr. Curt Connors, whose scientific work transforms him into a reptilian creature."
+230,comics,Who is Kingpin?,"Kingpin, Wilson Fisk, is a major crime boss who has repeatedly conflicted with Spider-Man and other Marvel heroes."
+231,comics,Why is Uncle Ben important to Spider-Man?,Uncle Ben is Peter Parker's uncle and a foundational influence on Peter's moral responsibility as Spider-Man.
+232,comics,Tell me about Carnage.,"Carnage is a violent symbiote-linked antagonist, most commonly associated with Cletus Kasady."
+233,comics,Who is Spider-Man's friendship with Human Torch like?,"Johnny Storm, the Human Torch, is one of Spider-Man's closest superhero friends and frequent friendly rivals."
+234,comics,Who played Spider-Man in The Amazing Spider-Man films?,Andrew Garfield played Peter Parker/Spider-Man in The Amazing Spider-Man films.
+235,comics,Who is Sandman?,Sandman is a Spider-Man villain whose body can transform into sand and whose classic identity is Flint Marko.
+236,comics,Who is Morbius?,"Morbius, Michael Morbius, is a scientifically created living vampire who has appeared as both an antagonist and an uneasy ally in Spider-Man-related stories."
+237,comics,What year did the Lizard first appear?,"The Lizard, associated with Dr. Curt Connors, first appeared in The Amazing Spider-Man #6 in 1963."
+238,comics,Who is Venom?,"Venom is a symbiote-based character whose relationship to Spider-Man varies between enemy, anti-hero, and uneasy ally depending on the story."
+239,comics,How much did Far From Home make worldwide?,Spider-Man: Far From Home earned about $1.132 billion worldwide according to The Numbers.
+240,comics,Tell me about J. Jonah Jameson.,J. Jonah Jameson is a longtime Spider-Man supporting character and a frequent critic of Spider-Man in many versions of the story.
+241,comics,What is Spider-Man 3 about?,"Spider-Man 3 continues the Tobey Maguire series with Peter facing multiple threats including Sandman, Venom, and a new Green Goblin."
+242,comics,How much did Into the Spider-Verse make worldwide?,Into the Spider-Verse earned about $373.8 million worldwide according to The Numbers.
+243,comics,Does Spider-Man heal quickly?,"Spider-Man versions often have enhanced recovery, but the exact extent varies by continuity."
+244,comics,Give me a concise explanation of Marvel's Spider-Man (2018) game.,Marvel's Spider-Man is an action-adventure game developed by Insomniac Games and published by Sony Interactive Entertainment.
+245,comics,Why should movie financial figures be source-labeled?,Movie budgets and box-office totals should be labeled as source-reported figures because databases can differ in accounting methods and later reissues.
+246,comics,Tell me about Black Cat.,"Felicia Hardy, Black Cat, is a recurring Spider-Man ally and romantic interest whose relationship with Peter is complicated."
+247,comics,Is Peter Parker intelligent?,Peter Parker is frequently portrayed as a highly intelligent scientist and inventor.
+248,comics,Tell me about Sandman.,Sandman is a Spider-Man villain whose body can transform into sand and whose classic identity is Flint Marko.

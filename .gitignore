@@ -1,0 +1,27 @@
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+backend/venv/
+venv/
+.venv/
+*.egg-info/
+
+# Node & Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.eslintcache
+
+# GGUF Models & Large Binaries
+*.gguf
+model/*.gguf
+
+# Environment & Logs
+.env
+.env.local
+*.log
+
+# OS Generated
+.DS_Store
+Thumbs.db
