@@ -20,3 +20,22 @@ def test_guardrail_out_of_domain_queries():
 def test_refusal_message_content():
     """Test refusal message constant contains Spider-Man assistant scope statement."""
     assert "Spider-Man assistant" in REFUSAL_MESSAGE
+
+def test_guardrail_followup_query_with_history():
+    """Test follow-up questions without explicit keywords pass guardrail when history contains Spider-Man context."""
+    history = [
+        {"role": "user", "content": "How did Harry Osborn die?"},
+        {"role": "assistant", "content": "Harry Osborn died in a glider crash during a battle."}
+    ]
+    assert is_spiderman_related("How did that crash happen?", history=history) is True
+    assert is_spiderman_related("Tell me more about his death.", history=history) is True
+
+def test_guardrail_unrelated_entity_with_history():
+    """Test non-Spider-Man entity queries (e.g. Jeff Bezos) are refused even when history contains Spider-Man context."""
+    history = [
+        {"role": "user", "content": "How did Harry Osborn die?"},
+        {"role": "assistant", "content": "Harry Osborn died in a glider crash during a battle."}
+    ]
+    assert is_spiderman_related("How did Jeff Bezos become so rich", history=history) is False
+    assert is_spiderman_related("Who is Elon Musk?", history=history) is False
+

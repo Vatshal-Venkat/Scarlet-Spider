@@ -42,6 +42,16 @@ export default function ChatView() {
       latency_ms: { tuned: null, base: null }
     };
 
+    // Extract recent conversation history turns
+    const historyPayload = messages.slice(-4).flatMap((m) => {
+      const turns = [{ role: 'user', content: m.user }];
+      const assistantText = m.tuned || m.base;
+      if (assistantText) {
+        turns.push({ role: 'assistant', content: assistantText });
+      }
+      return turns;
+    });
+
     setMessages((prev) => [...prev, userEntry]);
 
     try {
@@ -49,7 +59,8 @@ export default function ChatView() {
         // Compare mode (JSON POST concurrent)
         const data = await sendChat({
           message: prompt,
-          compare: true
+          compare: true,
+          history: historyPayload
         });
 
         setMessages((prev) => {
@@ -69,6 +80,7 @@ export default function ChatView() {
           message: prompt,
           model: mode,
           compare: false,
+          history: historyPayload,
           onChunk: (accumulatedText) => {
             setMessages((prev) => {
               const updated = [...prev];

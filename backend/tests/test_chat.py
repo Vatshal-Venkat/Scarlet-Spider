@@ -56,7 +56,7 @@ def test_chat_compare_mode(client):
 
 def test_chat_streaming_mode(client):
     """Test /api/chat streaming mode produces event-stream format."""
-    async def mock_stream(model_key, prompt):
+    async def mock_stream(model_key, prompt, history=None):
         yield 'data: {"token": "Spider-Man ", "done": false}\n\n'
         yield 'data: {"token": "is Peter Parker.", "done": true}\n\n'
 

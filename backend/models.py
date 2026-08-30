@@ -1,11 +1,17 @@
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from pydantic import BaseModel, Field, field_validator
+
+
+class MessageItem(BaseModel):
+    role: str = Field(..., description="Message sender role: 'user' or 'assistant'")
+    content: str = Field(..., description="Message text content")
 
 
 class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=2000, description="User prompt message")
     model: str = Field(default="spiderman", description="Selected model: 'spiderman' or 'base'")
     compare: bool = Field(default=False, description="Whether to query both fine-tuned and base models concurrently")
+    history: Optional[List[MessageItem]] = Field(default=None, description="Previous conversation turns")
 
     @field_validator("message")
     @classmethod

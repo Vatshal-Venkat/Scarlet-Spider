@@ -27,13 +27,13 @@ export async function fetchMetrics() {
   }
 }
 
-export async function sendChat({ message, model = 'spiderman', compare = false, onChunk }) {
+export async function sendChat({ message, model = 'spiderman', compare = false, history = [], onChunk }) {
   // If compare mode is enabled, we use standard JSON POST
   if (compare) {
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message, model, compare: true })
+      body: JSON.stringify({ message, model, compare: true, history })
     });
     if (!res.ok) {
       const errData = await res.json().catch(() => ({ detail: 'Unknown server error' }));
@@ -49,7 +49,7 @@ export async function sendChat({ message, model = 'spiderman', compare = false, 
       'Content-Type': 'application/json',
       'Accept': 'text/event-stream'
     },
-    body: JSON.stringify({ message, model, compare: false })
+    body: JSON.stringify({ message, model, compare: false, history })
   });
 
   if (!res.ok) {

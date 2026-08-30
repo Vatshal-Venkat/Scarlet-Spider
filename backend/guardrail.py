@@ -38,30 +38,67 @@ SPIDERMAN_KEYWORDS = [
     "marvel's spider-man", "insomniac"
 ]
 
+from typing import Optional, List, Dict, Any
+
 # Regex pattern matching any of the Spider-Man keywords as whole words or sub-words
 SPIDERMAN_PATTERN = re.compile(
     r"\b(" + "|".join(re.escape(k) for k in SPIDERMAN_KEYWORDS) + r")\b",
     re.IGNORECASE
 )
 
+# Explicit out-of-domain entities (celebrities, companies, countries, general topics)
+OUT_OF_DOMAIN_ENTITIES = re.compile(
+    r"\b(jeff bezos|bezos|elon musk|musk|bill gates|steve jobs|mark zuckerberg|barack obama|trump|biden|putin|"
+    r"amazon|tesla|spacex|google|apple|microsoft|facebook|twitter|instagram|tiktok|bitcoin|crypto|ethereum|"
+    r"france|germany|china|russia|japan|india|python|java|c\+\+|javascript|sql|html|css|quantum|calculus|physics|chemistry)\b",
+    re.IGNORECASE
+)
 
-def is_spiderman_related(prompt: str) -> bool:
+# Referential follow-up phrases that explicitly refer to previous topic details
+REFERENTIAL_FOLLOWUP_PATTERN = re.compile(
+    r"\b(that crash|that fight|that battle|that death|that scene|that movie|that film|that comic|that suit|that villain|that character|"
+    r"his death|his origin|his powers|his story|his suit|her death|her origin|her story|their fight|"
+    r"how did that happen|why did he|how did he|why did she|how did she|what happened to him|what happened to her|what happened next|tell me more about that|tell me more about him|tell me more about her)\b",
+    re.IGNORECASE
+)
+
+
+def is_spiderman_related(prompt: str, history: Optional[List[Dict[str, Any]]] = None) -> bool:
     """
     Classifies whether a user prompt is related to Spider-Man lore.
-    Returns True if the prompt contains Spider-Man terms/entities, False otherwise.
+    Requires explicit Spider-Man entity/term or an explicit referential follow-up phrase
+    preceded by Spider-Man context in history.
     """
     if not prompt or not prompt.strip():
         return False
 
     prompt_clean = prompt.strip()
 
-    # Direct keyword match
+    # 1. Reject if prompt contains an explicit non-Spider-Man entity and NO Spider-Man keyword
+    if OUT_OF_DOMAIN_ENTITIES.search(prompt_clean) and not SPIDERMAN_PATTERN.search(prompt_clean):
+        return False
+
+    # 2. Direct keyword match in current prompt
     if SPIDERMAN_PATTERN.search(prompt_clean):
         return True
 
-    # Generic check for 'spider' or 'wall crawler'
+    # 3. Generic keyword check
     lower_p = prompt_clean.lower()
     if "spider" in lower_p or "symbiote" in lower_p or "peter" in lower_p:
         return True
+
+    # 4. History-aware referential follow-up check
+    if history:
+        # Check if previous history has Spider-Man context
+        has_spidey_context = False
+        for msg in reversed(history[-4:]):
+            content = msg.get("content", "") if isinstance(msg, dict) else getattr(msg, "content", "")
+            if content and SPIDERMAN_PATTERN.search(content):
+                has_spidey_context = True
+                break
+
+        # Follow-up must contain an explicit referential phrase (e.g. "that crash", "his death", "how did that happen")
+        if has_spidey_context and REFERENTIAL_FOLLOWUP_PATTERN.search(prompt_clean):
+            return True
 
     return False

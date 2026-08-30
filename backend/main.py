@@ -88,12 +88,14 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
     if not request_data.message or not request_data.message.strip():
         raise HTTPException(status_code=400, detail="Message cannot be empty or whitespace.")
 
-    is_spidey_prompt = is_spiderman_related(request_data.message)
+    # Convert history items to dict format if present
+    history_list = [h.model_dump() for h in request_data.history] if request_data.history else None
+    is_spidey_prompt = is_spiderman_related(request_data.message, history=history_list)
 
     # 1. Comparison Mode
     if request_data.compare:
         if is_spidey_prompt:
-            result = await ollama_client.generate_compare(request_data.message)
+            result = await ollama_client.generate_compare(request_data.message, history=history_list)
             return ChatResponse(
                 tuned=result["tuned"],
                 base=result["base"],
@@ -104,7 +106,7 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
             )
         else:
             # Fine-tuned model refuses non-Spider-Man query; Untuned base model answers normally
-            base_text, base_ms = await ollama_client.generate_single("base", request_data.message)
+            base_text, base_ms = await ollama_client.generate_single("base", request_data.message, history=history_list)
             return ChatResponse(
                 tuned=REFUSAL_MESSAGE,
                 base=base_text,
@@ -132,11 +134,11 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
     accept_header = request.headers.get("accept", "")
     if stream or "text/event-stream" in accept_header:
         return StreamingResponse(
-            ollama_client.stream_single(request_data.model, request_data.message),
+            ollama_client.stream_single(request_data.model, request_data.message, history=history_list),
             media_type="text/event-stream"
         )
 
-    resp_text, latency = await ollama_client.generate_single(request_data.model, request_data.message)
+    resp_text, latency = await ollama_client.generate_single(request_data.model, request_data.message, history=history_list)
     if request_data.model == "spiderman":
         return ChatResponse(
             tuned=resp_text,

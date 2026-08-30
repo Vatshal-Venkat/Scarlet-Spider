@@ -24,11 +24,24 @@ class OllamaClient:
     def get_ollama_model_name(self, model_key: str) -> str:
         return MODEL_MAP.get(model_key, "spiderman:latest")
 
-    def prepare_payload(self, model_key: str, prompt: str, stream: bool = False) -> Dict[str, Any]:
+    def prepare_payload(self, model_key: str, prompt: str, history: Optional[list] = None, stream: bool = False) -> Dict[str, Any]:
         ollama_model = self.get_ollama_model_name(model_key)
+
+        full_prompt = prompt
+        if history:
+            turns = []
+            for item in history[-4:]:
+                role = item.get("role", "user") if isinstance(item, dict) else getattr(item, "role", "user")
+                content = item.get("content", "") if isinstance(item, dict) else getattr(item, "content", "")
+                if content:
+                    speaker = "User" if role == "user" else "Assistant"
+                    turns.append(f"{speaker}: {content}")
+            turns.append(f"User: {prompt}")
+            full_prompt = "\n\n".join(turns)
+
         return {
             "model": ollama_model,
-            "prompt": prompt,
+            "prompt": full_prompt,
             "options": {
                 "temperature": 0.7,
                 "top_p": 0.9
@@ -51,9 +64,9 @@ class OllamaClient:
         except Exception:
             return False, models_available
 
-    async def generate_single(self, model_key: str, prompt: str, timeout: float = 60.0) -> Tuple[str, int]:
+    async def generate_single(self, model_key: str, prompt: str, history: Optional[list] = None, timeout: float = 60.0) -> Tuple[str, int]:
         ollama_model = self.get_ollama_model_name(model_key)
-        payload = self.prepare_payload(model_key, prompt, stream=False)
+        payload = self.prepare_payload(model_key, prompt, history=history, stream=False)
         
         start_time = time.perf_counter()
         try:
@@ -80,10 +93,10 @@ class OllamaClient:
         except httpx.TimeoutException:
             raise OllamaServiceError("Model generation timed out (>60s).", status_code=504)
 
-    async def generate_compare(self, prompt: str, timeout: float = 60.0) -> Dict[str, Any]:
+    async def generate_compare(self, prompt: str, history: Optional[list] = None, timeout: float = 60.0) -> Dict[str, Any]:
         try:
-            tuned_task = self.generate_single("spiderman", prompt, timeout=timeout)
-            base_task = self.generate_single("base", prompt, timeout=timeout)
+            tuned_task = self.generate_single("spiderman", prompt, history=history, timeout=timeout)
+            base_task = self.generate_single("base", prompt, history=history, timeout=timeout)
 
             (tuned_resp, tuned_ms), (base_resp, base_ms) = await asyncio.gather(
                 tuned_task, base_task, return_exceptions=False
@@ -102,9 +115,9 @@ class OllamaClient:
         except Exception as e:
             raise OllamaServiceError(f"Comparison generation failed: {str(e)}", status_code=500)
 
-    async def stream_single(self, model_key: str, prompt: str, timeout: float = 60.0) -> AsyncGenerator[str, None]:
+    async def stream_single(self, model_key: str, prompt: str, history: Optional[list] = None, timeout: float = 60.0) -> AsyncGenerator[str, None]:
         ollama_model = self.get_ollama_model_name(model_key)
-        payload = self.prepare_payload(model_key, prompt, stream=True)
+        payload = self.prepare_payload(model_key, prompt, history=history, stream=True)
 
         try:
             async with httpx.AsyncClient(timeout=timeout) as client:
