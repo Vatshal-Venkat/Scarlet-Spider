@@ -232,11 +232,11 @@ def is_quotes_request(prompt: str) -> bool:
 def get_random_greeting_response() -> str:
     """
     Selects a random dialogue from the registry and formats the Spider-Man Assistant greeting:
-    'Hey there! "{quote}" — {speaker} in {source}. I'm your Spider-Man Assistant. You may ask me anything about Spider-Man!'
+    '\"{quote}" — {speaker} in {source}. I'm your Spider-Man Assistant. You may ask me anything about Spider-Man!'
     """
     item = random.choice(SPIDERMAN_DIALOGUES)
     return (
-        f"Hey there! \"{item['quote']}\" — {item['speaker']} in {item['source']}.\n\n"
+        f"\"{item['quote']}\" — {item['speaker']} in {item['source']}.\n\n"
         f"I'm your Spider-Man Assistant. You may ask me anything about Spider-Man!"
     )
 
