@@ -1,6 +1,8 @@
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export async function fetchHealth() {
   try {
-    const res = await fetch('/api/health');
+    const res = await fetch(`${API_BASE}/api/health`);
     const data = await res.json();
     return { ok: res.ok, status: res.status, data };
   } catch (err) {
@@ -18,7 +20,7 @@ export async function fetchHealth() {
 
 export async function fetchMetrics() {
   try {
-    const res = await fetch('/api/metrics');
+    const res = await fetch(`${API_BASE}/api/metrics`);
     if (!res.ok) throw new Error('Failed to load metrics');
     return await res.json();
   } catch (err) {
@@ -30,7 +32,7 @@ export async function fetchMetrics() {
 export async function sendChat({ message, model = 'spiderman', compare = false, history = [], onChunk }) {
   // If compare mode is enabled, we use standard JSON POST
   if (compare) {
-    const res = await fetch('/api/chat', {
+    const res = await fetch(`${API_BASE}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message, model, compare: true, history })
@@ -43,7 +45,7 @@ export async function sendChat({ message, model = 'spiderman', compare = false, 
   }
 
   // Single-model streaming response via Server-Sent Events (SSE)
-  const res = await fetch('/api/chat?stream=true', {
+  const res = await fetch(`${API_BASE}/api/chat?stream=true`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
