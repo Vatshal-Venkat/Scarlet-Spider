@@ -119,20 +119,20 @@ export default function ChatView() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-8.5rem)] max-w-5xl mx-auto px-4 pb-4">
-      {/* Top Mode Selection Segment Toolbar */}
-      <div className="flex items-center justify-between py-3 border-b border-slate-800/80">
-        <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+    <div className="flex flex-col min-h-[calc(100vh-4rem)] max-w-5xl mx-auto px-4 relative">
+      {/* Top Mode Selection Toolbar */}
+      <div className="flex items-center justify-between py-3.5 border-b border-zinc-800/80 sticky top-[57px] bg-[#09090b]/95 backdrop-blur-md z-20">
+        <div className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
           Inference Engine Mode
         </div>
 
-        <div className="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-medium">
+        <div className="flex items-center bg-[#121215] p-1 rounded-xl border border-zinc-800 text-xs font-medium">
           <button
             onClick={() => setMode('spiderman')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
               mode === 'spiderman'
-                ? 'bg-red-600 text-white shadow font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-red-700 text-white border border-red-600/40 shadow font-semibold'
+                : 'text-zinc-400 hover:text-zinc-200'
             }`}
           >
             <Shield className="w-3.5 h-3.5" />
@@ -143,8 +143,8 @@ export default function ChatView() {
             onClick={() => setMode('base')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
               mode === 'base'
-                ? 'bg-slate-700 text-white shadow font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                ? 'bg-zinc-800 text-white shadow font-semibold'
+                : 'text-zinc-400 hover:text-zinc-200'
             }`}
           >
             <Bot className="w-3.5 h-3.5 text-blue-400" />
@@ -156,7 +156,7 @@ export default function ChatView() {
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
               mode === 'compare'
                 ? 'bg-amber-600 text-white shadow font-semibold'
-                : 'text-slate-400 hover:text-slate-200'
+                : 'text-zinc-400 hover:text-zinc-200'
             }`}
           >
             <Columns className="w-3.5 h-3.5" />
@@ -165,19 +165,19 @@ export default function ChatView() {
         </div>
       </div>
 
-      {/* Messages Scroll Area */}
-      <div className="flex-1 overflow-y-auto py-4 space-y-4 pr-1">
+      {/* Messages Flow (Window scrollbar at extreme right edge) */}
+      <div className="flex-1 py-6 space-y-4">
         {messages.length === 0 ? (
           <div className="text-center py-4 max-w-3xl mx-auto">
             {/* Hero Card */}
-            <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 shadow-xl mb-4 text-center relative overflow-hidden">
-              <div className="inline-flex p-3 bg-red-600/20 text-red-500 rounded-2xl border border-red-500/30 mb-3 shadow">
-                <Shield className="w-8 h-8" />
+            <div className="bg-[#0d0d0f] border border-zinc-800/80 rounded-3xl p-6 shadow mb-4 text-center relative overflow-hidden">
+              <div className="inline-flex p-3 bg-red-950/40 text-red-400 rounded-2xl border border-red-800/40 mb-3">
+                <Shield className="w-7 h-7" />
               </div>
               <h2 className="text-2xl font-bold text-white tracking-tight">
                 Spider-Man AI Assistant
               </h2>
-              <p className="text-xs text-slate-400 mt-1.5 max-w-lg mx-auto leading-relaxed">
+              <p className="text-xs text-zinc-400 mt-1.5 max-w-lg mx-auto leading-relaxed">
                 QLoRA fine-tuned on 890 Spider-Man Q&A pairs (Qwen2.5-1.5B). Ask about Spider-Man lore, movies, and comic history, or compare outputs side-by-side.
               </p>
             </div>
@@ -190,17 +190,17 @@ export default function ChatView() {
               <CompareView key={msg.id} msg={msg} />
             ) : (
               <div key={msg.id} className="flex flex-col gap-2">
-                {/* User Message */}
+                {/* User Message — Sleek dark black inside, refined dark crimson border */}
                 <div className="flex justify-end">
-                  <div className="bg-gradient-to-r from-red-600 to-rose-600 text-white text-sm px-4.5 py-2.5 rounded-2xl rounded-tr-none max-w-xl shadow">
+                  <div className="bg-[#0d0d0f] border border-red-700/80 text-zinc-100 text-sm px-4.5 py-2.5 rounded-2xl rounded-tr-none max-w-xl shadow-sm">
                     {msg.user}
                   </div>
                 </div>
 
                 {/* Assistant Message */}
                 <div className="flex justify-start">
-                  <div className="bg-slate-900 border border-slate-800 text-slate-200 text-sm px-4.5 py-3.5 rounded-2xl rounded-tl-none max-w-2xl shadow-md">
-                    <div className="flex items-center justify-between border-b border-slate-800/80 pb-2 mb-2 text-xs font-semibold">
+                  <div className="bg-[#0d0d0f] border border-zinc-800 text-zinc-200 text-sm px-4.5 py-3.5 rounded-2xl rounded-tl-none max-w-2xl shadow-sm">
+                    <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2 mb-2 text-xs font-semibold">
                       <span className="flex items-center gap-1.5">
                         {msg.modelUsed === 'spiderman' ? (
                           <span className="text-red-400 flex items-center gap-1.5">
@@ -215,16 +215,16 @@ export default function ChatView() {
                         )}
                       </span>
                       {msg.latency_ms?.tuned || msg.latency_ms?.base ? (
-                        <span className="text-[10px] text-slate-400 bg-slate-800/80 px-2 py-0.5 rounded font-mono">
+                        <span className="text-[10px] text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded font-mono">
                           {msg.latency_ms.tuned || msg.latency_ms.base} ms
                         </span>
                       ) : null}
                     </div>
 
-                    <div className="leading-relaxed whitespace-pre-wrap text-slate-100">
+                    <div className="leading-relaxed whitespace-pre-wrap text-zinc-100">
                       {msg.modelUsed === 'spiderman' ? msg.tuned : msg.base}
                       {!msg.tuned && !msg.base && loading && (
-                        <span className="flex items-center gap-2 text-slate-400 text-xs italic py-1">
+                        <span className="flex items-center gap-2 text-zinc-500 text-xs italic py-1">
                           <Loader2 className="w-3.5 h-3.5 animate-spin text-red-500" />
                           Generating response...
                         </span>
@@ -238,7 +238,7 @@ export default function ChatView() {
         )}
 
         {error && (
-          <div className="bg-red-950/80 border border-red-500/50 text-red-200 text-xs p-3 rounded-xl text-center shadow">
+          <div className="bg-red-950/80 border border-red-800/50 text-red-200 text-xs p-3 rounded-xl text-center shadow">
             {error}
           </div>
         )}
@@ -246,9 +246,9 @@ export default function ChatView() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Pod Area */}
-      <div className="pt-2">
-        <div className="relative flex items-center bg-slate-900 border border-slate-800 focus-within:border-red-500/70 rounded-2xl p-2 shadow-lg transition-all">
+      {/* Sticky Bottom Input Bar Anchored at Viewport Bottom */}
+      <div className="sticky bottom-0 bg-[#09090b]/95 backdrop-blur-md pb-4 pt-2 z-30">
+        <div className="relative flex items-center bg-[#0d0d0f] border border-zinc-800 focus-within:border-red-700/80 rounded-2xl p-2 shadow transition-all">
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -260,7 +260,7 @@ export default function ChatView() {
             }
             rows={1}
             disabled={loading}
-            className="w-full bg-transparent text-slate-100 placeholder-slate-500 text-sm px-3.5 py-1.5 focus:outline-none resize-none"
+            className="w-full bg-transparent text-zinc-100 placeholder-zinc-500 text-sm px-3.5 py-1.5 focus:outline-none resize-none"
           />
 
           <button
@@ -268,8 +268,8 @@ export default function ChatView() {
             disabled={!input.trim() || loading}
             className={`p-2.5 rounded-xl transition-all cursor-pointer ${
               input.trim() && !loading
-                ? 'bg-red-600 hover:bg-red-500 text-white shadow-md'
-                : 'bg-slate-800 text-slate-600 cursor-not-allowed'
+                ? 'bg-red-700 hover:bg-red-600 text-white shadow border border-red-600/40'
+                : 'bg-zinc-800 text-zinc-600 cursor-not-allowed'
             }`}
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}

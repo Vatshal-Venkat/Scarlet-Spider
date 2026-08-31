@@ -2,7 +2,7 @@ import random
 import re
 from typing import Dict, List
 
-# 38 Iconic Spider-Man Dialogues Registry
+# 39 Iconic Spider-Man Dialogues Registry
 SPIDERMAN_DIALOGUES: List[Dict[str, str]] = [
     {
         "quote": "With great power comes great responsibility.",
@@ -232,18 +232,21 @@ def is_quotes_request(prompt: str) -> bool:
 def get_random_greeting_response() -> str:
     """
     Selects a random dialogue from the registry and formats the Spider-Man Assistant greeting:
-    'Hey there! "{quote}" — {speaker} in {source}. I'm your Spider-Man Assistant. You may ask me anything about Spider-Man!'
+    '"{quote}" - {speaker} in {source}
+
+    Hey there, I'm your Spider AI Assistant! You may ask me anything about Spider-Man!'
     """
     item = random.choice(SPIDERMAN_DIALOGUES)
     return (
-        f"Hey there! \"{item['quote']}\" — {item['speaker']} in {item['source']}.\n\n"
-        f"I'm your Spider-Man Assistant. You may ask me anything about Spider-Man!"
+        f"\"{item['quote']}\" - {item['speaker']} in {item['source']}\n\n"
+        f"Hey there, I'm your Spider AI Assistant! You may ask me anything about Spider-Man!"
     )
 
 
 def get_all_dialogues_formatted() -> str:
-    """Returns a formatted list of all 38 iconic Spider-Man dialogues."""
-    lines = ["Here are the 38 most iconic Spider-Man dialogues:\n"]
+    """Returns a formatted list of all curated iconic Spider-Man dialogues."""
+    count = len(SPIDERMAN_DIALOGUES)
+    lines = [f"Here are the {count} most iconic Spider-Man dialogues:\n"]
     for idx, item in enumerate(SPIDERMAN_DIALOGUES, 1):
         lines.append(f"{idx}. \"{item['quote']}\" — **{item['speaker']}** ({item['source']})")
     lines.append("\nFeel free to ask me about any of these characters, storylines, or films!")

@@ -7,8 +7,8 @@ from dialogues import (
 )
 
 def test_dialogues_count():
-    """Test registry contains all 38 curated dialogues."""
-    assert len(SPIDERMAN_DIALOGUES) == 38
+    """Test registry contains all 39 curated dialogues."""
+    assert len(SPIDERMAN_DIALOGUES) == 39
     for item in SPIDERMAN_DIALOGUES:
         assert "quote" in item
         assert "speaker" in item
@@ -32,13 +32,12 @@ def test_is_quotes_request():
 def test_get_random_greeting_response():
     """Test random greeting response formatting."""
     response = get_random_greeting_response()
-    assert "Hey there!" in response
-    assert "Spider-Man Assistant" in response
+    assert "Hey there, I'm your Spider AI Assistant" in response
     assert "You may ask me anything about Spider-Man!" in response
 
 def test_get_all_dialogues_formatted():
-    """Test formatted quotes list contains all 38 entries."""
+    """Test formatted quotes list contains all entries."""
     formatted = get_all_dialogues_formatted()
-    assert "38 most iconic Spider-Man dialogues" in formatted
+    assert f"{len(SPIDERMAN_DIALOGUES)} most iconic Spider-Man dialogues" in formatted
     assert "1. \"With great power comes great responsibility.\"" in formatted
-    assert "38. \"I'm going to change the world.\"" in formatted
+    assert "39. \"I believe, One person can make a difference\"" in formatted

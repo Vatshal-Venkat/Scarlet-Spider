@@ -103,19 +103,18 @@ def test_chat_greeting_response(client):
     response = client.post("/api/chat", json={"message": "Hi", "compare": True})
     assert response.status_code == 200
     data = response.json()
-    assert "Hey there!" in data["tuned"]
-    assert "Spider-Man Assistant" in data["tuned"]
+    assert "Hey there, I'm your Spider AI Assistant" in data["tuned"]
     assert "general-purpose AI assistant" in data["base"]
 
 def test_chat_best_quotes_response(client):
-    """Test /api/chat best quotes request returns all 38 dialogues for tuned model."""
+    """Test /api/chat best quotes request returns all dialogues for tuned model."""
     mock_base_resp = ("Here are some quotes...", 1200)
     with patch("main.ollama_client.generate_single", new_callable=AsyncMock) as mock_gen:
         mock_gen.return_value = mock_base_resp
         response = client.post("/api/chat", json={"message": "Give me the best Spider-Man dialogues", "compare": True})
         assert response.status_code == 200
         data = response.json()
-        assert "38 most iconic Spider-Man dialogues" in data["tuned"]
+        assert "most iconic Spider-Man dialogues" in data["tuned"]
         assert "With great power comes great responsibility." in data["tuned"]
 
 

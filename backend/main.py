@@ -15,10 +15,20 @@ sys.path.insert(0, str(Path(__file__).parent))
 from models import ChatRequest, ChatResponse, LatencyMs, HealthResponse
 from ollama_client import OllamaClient, OllamaServiceError
 
+from contextlib import asynccontextmanager
+
+ollama_client = OllamaClient()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    await ollama_client.aclose()
+
 app = FastAPI(
     title="Spider-Man SLM Assistant API",
     description="Backend API for serving fine-tuned Qwen 2.5 1.5B Spider-Man model and comparison with base model.",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 # CORS Setup
@@ -35,8 +45,6 @@ DATA_DIR = Path(__file__).parent / "data"
 # Static files for loss curve PNGs and metrics
 if DATA_DIR.exists():
     app.mount("/data", StaticFiles(directory=str(DATA_DIR)), name="data")
-
-ollama_client = OllamaClient()
 
 
 @app.exception_handler(OllamaServiceError)
@@ -175,7 +183,7 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
                 )
             )
 
-    # 2. Single Model Mode: spiderman model gets guardrail refusal if out-of-domain
+    # 4. Single Model Mode: spiderman model gets guardrail refusal if out-of-domain
     if request_data.model == "spiderman" and not is_spidey_prompt:
         accept_header = request.headers.get("accept", "")
         if stream or "text/event-stream" in accept_header:
@@ -189,7 +197,7 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
             latency_ms=LatencyMs(tuned=0, base=None)
         )
 
-    # 3. Single Model Mode: normal execution for in-domain spiderman or base model queries
+    # 5. Single Model Mode: normal execution for in-domain spiderman or base model queries
     accept_header = request.headers.get("accept", "")
     if stream or "text/event-stream" in accept_header:
         return StreamingResponse(
