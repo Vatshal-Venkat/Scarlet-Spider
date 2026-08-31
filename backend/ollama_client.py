@@ -27,7 +27,8 @@ class OllamaClient:
         if self._client is None or self._client.is_closed:
             self._client = httpx.AsyncClient(
                 timeout=httpx.Timeout(timeout, connect=5.0),
-                limits=httpx.Limits(max_keepalive_connections=10, max_connections=20)
+                limits=httpx.Limits(max_keepalive_connections=10, max_connections=20),
+                headers={"ngrok-skip-browser-warning": "true"}
             )
         return self._client
 
