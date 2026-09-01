@@ -85,7 +85,9 @@ export async function sendChat({ message, model = 'spiderman', compare = false, 
             if (onChunk) onChunk(fullText);
           }
         } catch (e) {
-          // ignore parse errors on partial stream chunks
+          if (e.message && !e.message.includes('JSON')) {
+            throw e;
+          }
         }
       }
     }

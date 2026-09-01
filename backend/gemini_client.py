@@ -108,8 +108,13 @@ class GeminiClient:
             res = await client.post(url, json=payload)
             elapsed_ms = int((time.perf_counter() - start_time) * 1000)
 
-            if res.status_code == 401 or res.status_code == 403:
-                raise GeminiServiceError("Invalid Gemini API key or unauthorized request.", status_code=503)
+            if res.status_code in (401, 403):
+                try:
+                    err_json = res.json()
+                    err_msg = err_json.get("error", {}).get("message", "Invalid Gemini API key or unauthorized request.")
+                except Exception:
+                    err_msg = "Invalid Gemini API key or unauthorized request."
+                raise GeminiServiceError(f"Gemini API Error ({res.status_code}): {err_msg}", status_code=503)
             if res.status_code != 200:
                 raise GeminiServiceError(f"Gemini API returned status {res.status_code}: {res.text}", status_code=503)
 
@@ -159,7 +164,13 @@ class GeminiClient:
             client = self._get_client(timeout=timeout)
             async with client.stream("POST", url, json=payload) as response:
                 if response.status_code != 200:
-                    yield f"data: {json.dumps({'error': f'Gemini API returned status {response.status_code}'})}\n\n"
+                    try:
+                        err_bytes = await response.aread()
+                        err_json = json.loads(err_bytes.decode('utf-8'))
+                        err_msg = err_json.get("error", {}).get("message", f"Gemini API returned status {response.status_code}")
+                    except Exception:
+                        err_msg = f"Gemini API returned status {response.status_code}"
+                    yield f"data: {json.dumps({'error': err_msg})}\n\n"
                     return
 
                 async for line in response.aiter_lines():

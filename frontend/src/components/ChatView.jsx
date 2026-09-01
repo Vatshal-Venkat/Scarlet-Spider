@@ -98,15 +98,33 @@ export default function ChatView() {
         const elapsed = Date.now() - startTime;
         setMessages((prev) => {
           const updated = [...prev];
-          updated[newMsgIndex].latency_ms = {
-            tuned: mode === 'spiderman' ? elapsed : null,
-            base: mode === 'base' ? elapsed : null
-          };
+          if (updated[newMsgIndex]) {
+            updated[newMsgIndex].latency_ms = {
+              tuned: mode === 'spiderman' ? elapsed : null,
+              base: mode === 'base' ? elapsed : null
+            };
+          }
           return updated;
         });
       }
     } catch (err) {
-      setError(err.message || 'Failed to generate response.');
+      const errMsg = err.message || 'Failed to generate response.';
+      setError(errMsg);
+      setMessages((prev) => {
+        const updated = [...prev];
+        if (updated[newMsgIndex]) {
+          const errorDisplay = `⚠️ Service Error: ${errMsg}`;
+          if (isCompare) {
+            updated[newMsgIndex].tuned = updated[newMsgIndex].tuned || errorDisplay;
+            updated[newMsgIndex].base = updated[newMsgIndex].base || errorDisplay;
+          } else if (mode === 'spiderman') {
+            updated[newMsgIndex].tuned = updated[newMsgIndex].tuned || errorDisplay;
+          } else {
+            updated[newMsgIndex].base = updated[newMsgIndex].base || errorDisplay;
+          }
+        }
+        return updated;
+      });
     } finally {
       setLoading(false);
     }

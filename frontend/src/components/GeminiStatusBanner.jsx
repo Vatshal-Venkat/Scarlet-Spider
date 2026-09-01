@@ -26,12 +26,17 @@ export default function GeminiStatusBanner({ health, onRetry }) {
                 : 'One or more Gemini API models reported an issue.'}
             </p>
 
-            <div className="mt-2.5 bg-slate-950/80 rounded border border-red-900/60 p-2.5 font-mono text-[11px] text-slate-300 flex flex-col gap-1">
-              <div className="flex items-center gap-1.5 text-slate-400 font-semibold mb-1">
+            <div className="mt-2.5 bg-slate-950/80 rounded-xl border border-red-900/60 p-3 font-mono text-[11px] text-slate-300 flex flex-col gap-1.5">
+              <div className="flex items-center gap-1.5 text-slate-400 font-semibold mb-0.5">
                 <Terminal className="w-3.5 h-3.5 text-red-400" />
-                <span>Configure environment variable:</span>
+                <span>Option 1: Add to backend/.env file</span>
               </div>
-              <code className="text-red-300">export GEMINI_API_KEY="your_api_key_here"</code>
+              <code className="text-red-300 bg-black/40 px-2 py-1 rounded">GEMINI_API_KEY=your_gemini_api_key_here</code>
+              <div className="flex items-center gap-1.5 text-slate-400 font-semibold mt-1">
+                <span>Option 2: Terminal environment variable</span>
+              </div>
+              <code className="text-zinc-300 bg-black/40 px-2 py-1 rounded">PowerShell: $env:GEMINI_API_KEY="your_api_key_here"</code>
+              <code className="text-zinc-300 bg-black/40 px-2 py-1 rounded">Bash/Mac: export GEMINI_API_KEY="your_api_key_here"</code>
             </div>
           </div>
         </div>

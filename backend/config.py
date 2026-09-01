@@ -3,13 +3,21 @@ from pathlib import Path
 
 try:
     from dotenv import load_dotenv
-    load_dotenv(Path(__file__).parent / ".env")
+    # Check backend/.env first, then root .env
+    backend_env = Path(__file__).parent / ".env"
+    root_env = Path(__file__).parent.parent / ".env"
+    if backend_env.exists():
+        load_dotenv(backend_env)
+    elif root_env.exists():
+        load_dotenv(root_env)
+    else:
+        load_dotenv()
 except ImportError:
     pass
 
 GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
 GEMINI_BASE_URL: str = os.getenv("GEMINI_BASE_URL", "https://generativelanguage.googleapis.com/v1beta")
-DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "gemini-2.5-flash")
+DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "gemini-2.0-flash")
 
 SPIDERMAN_SYSTEM_PROMPT: str = (
     "You are Spider-Man (Peter Parker) — your friendly neighborhood Spider-Man from Marvel Comics, movies, and the Spider-Verse.\n\n"
