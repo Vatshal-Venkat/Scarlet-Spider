@@ -18,7 +18,7 @@ export default function CompareView({ msg }) {
       {/* 2-Column Side-by-Side Comparison Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full mt-2">
         {/* Left Column: Fine-Tuned Model (spiderman) */}
-        <div className="bg-[#0d0d0f] border border-zinc-800 rounded-2xl p-4.5 flex flex-col shadow-sm">
+        <div className="bg-[#0d0d0f] border border-red-900/50 rounded-2xl p-4.5 flex flex-col shadow-sm">
           <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2.5 mb-3">
             <div className="flex items-center gap-2 text-xs font-semibold text-red-400">
               <img src={spiderAvatar} alt="Spider-Man" className="w-4 h-4 object-contain" style={{ transform: 'rotate(-10deg)' }} />
@@ -50,11 +50,11 @@ export default function CompareView({ msg }) {
         </div>
 
         {/* Right Column: Untuned Base Model (ChatGPT style) */}
-        <div className="bg-[#0d0d0f] border border-zinc-800 rounded-2xl p-4.5 flex flex-col shadow-sm">
+        <div className="bg-[#0d0d0f] border border-blue-900/50 rounded-2xl p-4.5 flex flex-col shadow-sm">
           <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2.5 mb-3">
-            <div className="flex items-center gap-2 text-xs font-semibold text-zinc-300">
+            <div className="flex items-center gap-2 text-xs font-semibold text-blue-400">
               <Bot className="w-4 h-4 text-blue-400" />
-              <span>Untuned Base (ChatGPT)</span>
+              <span>Untuned Base (Gemini)</span>
             </div>
             {latency_ms?.base !== undefined && latency_ms?.base !== null && (
               <div className="flex items-center gap-1 text-[11px] text-zinc-300 bg-zinc-800 px-2 py-0.5 rounded font-mono">

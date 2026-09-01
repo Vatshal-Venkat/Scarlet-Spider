@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Sparkles, Bot, Columns, Loader2, Shield } from 'lucide-react';
+import { Send, Sparkles, Bot, Columns, Loader2, Shield, Mic, MicOff } from 'lucide-react';
 import spiderAvatar from '../assets/spider-sense-transparent.png';
 import SampleQuestions from './SampleQuestions';
 import CompareView from './CompareView';
@@ -12,7 +12,9 @@ export default function ChatView() {
   const [mode, setMode] = useState('spiderman'); // 'spiderman', 'base', 'compare'
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef(null);
+  const recognitionRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -21,6 +23,55 @@ export default function ChatView() {
   useEffect(() => {
     scrollToBottom();
   }, [messages, loading]);
+
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = 'en-US';
+
+      recognition.onresult = (event) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        if (transcript) {
+          setInput((prev) => (prev ? `${prev} ${transcript}` : transcript));
+        }
+      };
+
+      recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current = recognition;
+    }
+  }, []);
+
+  const toggleListening = () => {
+    if (!recognitionRef.current) {
+      alert('Speech recognition (voice-to-text) is not supported in this browser. Please try Google Chrome or Microsoft Edge.');
+      return;
+    }
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      try {
+        recognitionRef.current.start();
+        setIsListening(true);
+      } catch (err) {
+        console.error('Failed to start speech recognition:', err);
+      }
+    }
+  };
 
   const handleSend = async (textToSend) => {
     const prompt = (textToSend || input).trim();
@@ -183,7 +234,7 @@ export default function ChatView() {
             onClick={() => setMode('spiderman')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
               mode === 'spiderman'
-                ? 'bg-red-700 text-white border border-red-600/40 shadow font-semibold'
+                ? 'bg-red-600 text-white border border-red-500/50 shadow font-semibold'
                 : 'text-zinc-400 hover:text-zinc-200'
             }`}
           >
@@ -195,11 +246,11 @@ export default function ChatView() {
             onClick={() => setMode('base')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
               mode === 'base'
-                ? 'bg-zinc-800 text-white shadow font-semibold'
+                ? 'bg-blue-600 text-white border border-blue-400/40 shadow font-semibold'
                 : 'text-zinc-400 hover:text-zinc-200'
             }`}
           >
-            <Bot className="w-3.5 h-3.5 text-blue-400" />
+            <Bot className="w-3.5 h-3.5 text-blue-100" />
             <span>Untuned Model (Gemini)</span>
           </button>
 
@@ -207,7 +258,7 @@ export default function ChatView() {
             onClick={() => setMode('compare')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
               mode === 'compare'
-                ? 'bg-amber-600 text-white shadow font-semibold'
+                ? 'bg-gradient-to-r from-red-600 to-blue-600 text-white border border-blue-400/30 shadow font-semibold'
                 : 'text-zinc-400 hover:text-zinc-200'
             }`}
           >
@@ -317,11 +368,24 @@ export default function ChatView() {
           />
 
           <button
+            type="button"
+            onClick={toggleListening}
+            title={isListening ? "Stop listening" : "Voice input"}
+            className={`p-2.5 rounded-xl transition-all cursor-pointer mr-1 ${
+              isListening
+                ? 'bg-red-600/20 text-red-500 animate-pulse border border-red-500/40'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50'
+            }`}
+          >
+            {isListening ? <MicOff className="w-4 h-4 text-red-400" /> : <Mic className="w-4 h-4 text-zinc-400" />}
+          </button>
+
+          <button
             onClick={() => handleSend()}
             disabled={!input.trim() || loading}
             className={`p-2.5 rounded-xl transition-all cursor-pointer ${
               input.trim() && !loading
-                ? 'bg-red-700 hover:bg-red-600 text-white shadow border border-red-600/40'
+                ? 'bg-red-600 hover:bg-red-500 text-white shadow border border-red-500/40'
                 : 'bg-zinc-800 text-zinc-600 cursor-not-allowed'
             }`}
           >
