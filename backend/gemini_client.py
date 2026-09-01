@@ -34,7 +34,7 @@ class GeminiClient:
 
         if self._client is None or self._client.is_closed or (hasattr(self, "_loop") and self._loop is not None and loop is not None and self._loop != loop):
             self._client = httpx.AsyncClient(
-                timeout=httpx.Timeout(60.0, connect=15.0, read=60.0, write=30.0, pool=15.0),
+                timeout=httpx.Timeout(300.0, connect=15.0, read=300.0, write=30.0, pool=15.0),
                 limits=httpx.Limits(max_keepalive_connections=10, max_connections=20)
             )
             self._loop = loop
@@ -95,7 +95,7 @@ class GeminiClient:
         except Exception:
             return False, models_available
 
-    async def generate_single(self, model_key: str, prompt: str, history: Optional[list] = None, timeout: float = 60.0) -> Tuple[str, int]:
+    async def generate_single(self, model_key: str, prompt: str, history: Optional[list] = None, timeout: float = 300.0) -> Tuple[str, int]:
         if not self.api_key:
             raise GeminiServiceError("Gemini API key is not configured.", status_code=503)
 
@@ -129,9 +129,9 @@ class GeminiClient:
         except httpx.ConnectError:
             raise GeminiServiceError("Gemini API service is unreachable.", status_code=503)
         except httpx.TimeoutException:
-            raise GeminiServiceError("Model generation timed out (>60s).", status_code=504)
+            raise GeminiServiceError("Model generation timed out (>300s).", status_code=504)
 
-    async def generate_compare(self, prompt: str, history: Optional[list] = None, timeout: float = 60.0) -> Dict[str, Any]:
+    async def generate_compare(self, prompt: str, history: Optional[list] = None, timeout: float = 300.0) -> Dict[str, Any]:
         try:
             tuned_task = self.generate_single("spiderman", prompt, history=history, timeout=timeout)
             base_task = self.generate_single("base", prompt, history=history, timeout=timeout)
@@ -153,7 +153,7 @@ class GeminiClient:
         except Exception as e:
             raise GeminiServiceError(f"Comparison generation failed: {str(e)}", status_code=500)
 
-    async def stream_single(self, model_key: str, prompt: str, history: Optional[list] = None, timeout: float = 60.0) -> AsyncGenerator[str, None]:
+    async def stream_single(self, model_key: str, prompt: str, history: Optional[list] = None, timeout: float = 300.0) -> AsyncGenerator[str, None]:
         if not self.api_key:
             yield f"data: {json.dumps({'error': 'Gemini API key is not configured.'})}\n\n"
             return
@@ -197,4 +197,4 @@ class GeminiClient:
         except httpx.ConnectError:
             yield f"data: {json.dumps({'error': 'Gemini API service is unreachable.'})}\n\n"
         except httpx.TimeoutException:
-            yield f"data: {json.dumps({'error': 'Generation timed out (>60s).'})}\n\n"
+            yield f"data: {json.dumps({'error': 'Generation timed out (>300s).'})}\n\n"

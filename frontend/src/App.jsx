@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Sparkles, Activity, MessageSquare } from 'lucide-react';
-import spiderAvatar from './assets/spider-avatar.jpeg';
+import spiderAvatar from './assets/spider-sense-transparent.png';
 import ChatView from './components/ChatView';
 import MetricsView from './components/MetricsView';
 import GeminiStatusBanner from './components/GeminiStatusBanner';

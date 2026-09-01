@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sparkles, Bot, Clock, AlertTriangle, ShieldCheck } from 'lucide-react';
-import spiderAvatar from '../assets/spider-avatar.jpeg';
+import spiderAvatar from '../assets/spider-sense-transparent.png';
 
 export default function CompareView({ msg }) {
   const { user, tuned, base, latency_ms } = msg;

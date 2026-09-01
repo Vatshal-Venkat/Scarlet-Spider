@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Sparkles, Bot, Columns, Loader2, Shield } from 'lucide-react';
-import spiderAvatar from '../assets/spider-avatar.jpeg';
+import spiderAvatar from '../assets/spider-sense-transparent.png';
 import SampleQuestions from './SampleQuestions';
 import CompareView from './CompareView';
 import { sendChat } from '../api';
@@ -57,23 +57,55 @@ export default function ChatView() {
 
     try {
       if (isCompare) {
-        // Compare mode (JSON POST concurrent)
-        const data = await sendChat({
+        // Compare mode: Run two concurrent streaming requests
+        const startTimeTuned = Date.now();
+        const startTimeBase = Date.now();
+
+        const p1 = sendChat({
           message: prompt,
-          compare: true,
-          history: historyPayload
+          model: 'spiderman',
+          compare: false,
+          history: historyPayload,
+          onChunk: (accumulatedText) => {
+            setMessages((prev) => {
+              const updated = [...prev];
+              updated[newMsgIndex].tuned = accumulatedText;
+              return updated;
+            });
+          }
+        }).then(() => {
+          setMessages((prev) => {
+            const updated = [...prev];
+            if (updated[newMsgIndex]) {
+              updated[newMsgIndex].latency_ms.tuned = Date.now() - startTimeTuned;
+            }
+            return updated;
+          });
         });
 
-        setMessages((prev) => {
-          const updated = [...prev];
-          updated[newMsgIndex] = {
-            ...updated[newMsgIndex],
-            tuned: data.tuned,
-            base: data.base,
-            latency_ms: data.latency_ms
-          };
-          return updated;
+        const p2 = sendChat({
+          message: prompt,
+          model: 'base',
+          compare: false,
+          history: historyPayload,
+          onChunk: (accumulatedText) => {
+            setMessages((prev) => {
+              const updated = [...prev];
+              updated[newMsgIndex].base = accumulatedText;
+              return updated;
+            });
+          }
+        }).then(() => {
+          setMessages((prev) => {
+            const updated = [...prev];
+            if (updated[newMsgIndex]) {
+              updated[newMsgIndex].latency_ms.base = Date.now() - startTimeBase;
+            }
+            return updated;
+          });
         });
+
+        await Promise.all([p1, p2]);
       } else {
         // Single model SSE streaming mode
         const startTime = Date.now();
