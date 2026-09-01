@@ -7,7 +7,7 @@ SPIDERMAN_DIALOGUES: List[Dict[str, str]] = [
     {
         "quote": "With great power comes great responsibility.",
         "speaker": "Uncle Ben",
-        "source": "Spider-Man (2002) & TASM"
+        "source": "Spider-Man (2002) & The Amazing SpiderMan"
     },
     {
         "quote": "I believe there is a hero in all of us.",
@@ -26,13 +26,13 @@ SPIDERMAN_DIALOGUES: List[Dict[str, str]] = [
     },
     {
         "quote": "Trying to do better.",
-        "speaker": "Peter Parker (Tobey Maguire)",
+        "speaker": "Peter Parker",
         "source": "Spider-Man 2 & Spider-Man: No Way Home"
     },
     {
         "quote": "Trust me Peter, when you try to fix things, you'll always have to face the consequences.",
-        "speaker": "The Lizard (Dr. Curt Connors)",
-        "source": "Spider-Man: Homecoming / TASM"
+        "speaker": "The Lizard / Dr. Curt Connors",
+        "source": "Spider-Man: Homecoming / The Amazing SpiderMan"
     },
     {
         "quote": "It's easy to fool people when they are fooling themselves.",
@@ -41,12 +41,12 @@ SPIDERMAN_DIALOGUES: List[Dict[str, str]] = [
     },
     {
         "quote": "Did someone watch this old movie called Alien?",
-        "speaker": "Spider-Man (Peter Parker)",
+        "speaker": "Spider-Man / Peter Parker",
         "source": "Avengers: Infinity War"
     },
     {
         "quote": "Mr. Stark, we won.",
-        "speaker": "Spider-Man (Peter Parker)",
+        "speaker": "Spider-Man / Peter Parker",
         "source": "Avengers: Endgame"
     },
     {
@@ -81,7 +81,7 @@ SPIDERMAN_DIALOGUES: List[Dict[str, str]] = [
     },
     {
         "quote": "You know what I love about being Spider-Man? Everything!",
-        "speaker": "Peter Parker (Andrew Garfield)",
+        "speaker": "Spider-Man / Peter Parker",
         "source": "The Amazing Spider-Man 2"
     },
     {
@@ -91,7 +91,7 @@ SPIDERMAN_DIALOGUES: List[Dict[str, str]] = [
     },
     {
         "quote": "I love you guys!",
-        "speaker": "Peter 3 (Andrew Garfield)",
+        "speaker": "Peter 3",
         "source": "Spider-Man: No Way Home"
     },
     {
@@ -116,12 +116,12 @@ SPIDERMAN_DIALOGUES: List[Dict[str, str]] = [
     },
     {
         "quote": "It's what we do.",
-        "speaker": "Peter 2 (Tobey Maguire)",
+        "speaker": "Peter 2",
         "source": "Spider-Man: No Way Home"
     },
     {
         "quote": "Sometimes, to do what's right... we have to give up the thing we want the most. Even our dreams.",
-        "speaker": "Peter Parker (Tobey Maguire)",
+        "speaker": "Peter Parker",
         "source": "Spider-Man 2"
     },
     {
