@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 export default function SpideyDecorations() {
   const reducedMotion =
@@ -103,14 +103,14 @@ export default function SpideyDecorations() {
         }}
       />
 
-      {/* 3. Right-Bottom: Spider-Man Crouched Enhanced + Cowboy dust/air breeze */}
+      {/* 3. Right-Bottom: Spider-Man Crouched Enhanced (reduced by half) + Cowboy dust/air breeze */}
       <div
         style={{
           position: "fixed",
           bottom: "10px",
           right: "15px",
-          width: "215px",
-          maxWidth: "17vw",
+          width: "108px",
+          maxWidth: "8.5vw",
           zIndex: 5,
           pointerEvents: "none",
         }}
@@ -123,7 +123,7 @@ export default function SpideyDecorations() {
             width: "100%",
             height: "auto",
             display: "block",
-            filter: "drop-shadow(0 8px 22px rgba(0, 0, 0, 0.6))",
+            filter: "drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6))",
           }}
         />
 
@@ -132,10 +132,10 @@ export default function SpideyDecorations() {
           aria-hidden="true"
           style={{
             position: "absolute",
-            bottom: "8px",
-            right: "20px",
-            width: "90px",
-            height: "35px",
+            bottom: "4px",
+            right: "10px",
+            width: "45px",
+            height: "18px",
             overflow: "visible",
             pointerEvents: "none",
           }}
@@ -145,10 +145,10 @@ export default function SpideyDecorations() {
             viewBox="0 0 60 20"
             style={{
               position: "absolute",
-              bottom: "4px",
-              right: "8px",
-              width: "55px",
-              height: "18px",
+              bottom: "2px",
+              right: "4px",
+              width: "30px",
+              height: "10px",
               animation: !reducedMotion ? "cowboyDustDrift 3.2s ease-out infinite" : "none",
             }}
           >
@@ -169,9 +169,9 @@ export default function SpideyDecorations() {
             style={{
               position: "absolute",
               bottom: "0px",
-              right: "18px",
-              width: "45px",
-              height: "15px",
+              right: "8px",
+              width: "25px",
+              height: "8px",
               animation: !reducedMotion ? "cowboyDustDrift2 2.6s ease-out 1.3s infinite" : "none",
             }}
           >
