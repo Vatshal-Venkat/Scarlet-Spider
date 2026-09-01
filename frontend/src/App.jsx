@@ -38,7 +38,7 @@ export default function App() {
               <h1 className="text-sm font-bold tracking-tight text-white flex items-center gap-2">
                 Spider-Man SLM
                 <span className="text-[10px] bg-red-950/80 text-red-400 border border-red-800/60 px-2 py-0.5 rounded font-mono font-medium uppercase">
-                  Run B • QLoRA
+                  Run  • QLoRA
                 </span>
               </h1>
               <p className="text-[11px] text-zinc-400">

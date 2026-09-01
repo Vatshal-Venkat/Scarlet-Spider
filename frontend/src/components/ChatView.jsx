@@ -188,7 +188,7 @@ export default function ChatView() {
             }`}
           >
             <Shield className="w-3.5 h-3.5" />
-            <span>Fine-Tuned (Run B)</span>
+            <span>Fine-Tuned</span>
           </button>
 
           <button
@@ -200,7 +200,7 @@ export default function ChatView() {
             }`}
           >
             <Bot className="w-3.5 h-3.5 text-blue-400" />
-            <span>Untuned Base</span>
+            <span>Untuned Model (Gemini)</span>
           </button>
 
           <button
@@ -212,7 +212,7 @@ export default function ChatView() {
             }`}
           >
             <Columns className="w-3.5 h-3.5" />
-            <span>Compare Both</span>
+            <span>Compare Both Modes</span>
           </button>
         </div>
       </div>
