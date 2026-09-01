@@ -36,15 +36,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#09090b] text-zinc-100 selection:bg-red-600 selection:text-white">
-      <SpideyDecorations
-        chatState={chatState}
-        isMetricsTab={isMetricsTab}
-        messageCount={messageCount}
-        triggerSwingLike={triggerSwingLike}
-        onSwingLikeConsumed={consumeSwingLike}
-        streamingStarted={streamingStarted}
-        inferenceError={inferenceError}
-      />
+      <SpideyDecorations />
       {/* Gemini Status Error Banner (if degraded/down) */}
       <GeminiStatusBanner health={health} onRetry={checkHealth} />
 
