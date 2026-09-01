@@ -17,7 +17,7 @@ except ImportError:
 
 GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
 GEMINI_BASE_URL: str = os.getenv("GEMINI_BASE_URL", "https://generativelanguage.googleapis.com/v1beta")
-DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "gemini-2.0-flash")
+DEFAULT_MODEL: str = os.getenv("DEFAULT_MODEL", "gemini-3.6-flash")
 
 SPIDERMAN_SYSTEM_PROMPT: str = (
     "You are Spider-Man (Peter Parker) — your friendly neighborhood Spider-Man from Marvel Comics, movies, and the Spider-Verse.\n\n"

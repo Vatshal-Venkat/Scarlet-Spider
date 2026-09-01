@@ -26,7 +26,7 @@ class GeminiClient:
         self.api_key = api_key or GEMINI_API_KEY
         self._client: Optional[httpx.AsyncClient] = None
 
-    def _get_client(self, timeout: float = 60.0) -> httpx.AsyncClient:
+    def _get_client(self) -> httpx.AsyncClient:
         try:
             loop = asyncio.get_running_loop()
         except RuntimeError:
@@ -34,7 +34,7 @@ class GeminiClient:
 
         if self._client is None or self._client.is_closed or (hasattr(self, "_loop") and self._loop is not None and loop is not None and self._loop != loop):
             self._client = httpx.AsyncClient(
-                timeout=httpx.Timeout(timeout, connect=5.0),
+                timeout=httpx.Timeout(60.0, connect=15.0, read=60.0, write=30.0, pool=15.0),
                 limits=httpx.Limits(max_keepalive_connections=10, max_connections=20)
             )
             self._loop = loop
@@ -85,8 +85,8 @@ class GeminiClient:
         if not self.api_key:
             return False, models_available
         try:
-            client = self._get_client(timeout=5.0)
-            res = await client.get(f"{GEMINI_BASE_URL}/models?key={self.api_key}")
+            client = self._get_client()
+            res = await client.get(f"{GEMINI_BASE_URL}/models?key={self.api_key}", timeout=10.0)
             if res.status_code == 200:
                 models_available["spiderman"] = True
                 models_available["base"] = True
@@ -104,8 +104,9 @@ class GeminiClient:
 
         start_time = time.perf_counter()
         try:
-            client = self._get_client(timeout=timeout)
-            res = await client.post(url, json=payload)
+            client = self._get_client()
+            req_timeout = httpx.Timeout(timeout, connect=15.0, read=timeout, write=30.0)
+            res = await client.post(url, json=payload, timeout=req_timeout)
             elapsed_ms = int((time.perf_counter() - start_time) * 1000)
 
             if res.status_code in (401, 403):
@@ -161,8 +162,9 @@ class GeminiClient:
         url = f"{GEMINI_BASE_URL}/models/{DEFAULT_MODEL}:streamGenerateContent?alt=sse&key={self.api_key}"
 
         try:
-            client = self._get_client(timeout=timeout)
-            async with client.stream("POST", url, json=payload) as response:
+            client = self._get_client()
+            req_timeout = httpx.Timeout(timeout, connect=15.0, read=timeout, write=30.0)
+            async with client.stream("POST", url, json=payload, timeout=req_timeout) as response:
                 if response.status_code != 200:
                     try:
                         err_bytes = await response.aread()
