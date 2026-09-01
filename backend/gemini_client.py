@@ -2,27 +2,16 @@ import os
 import asyncio
 import json
 import time
-from pathlib import Path
 from typing import Dict, Any, Tuple, Optional, AsyncGenerator
 import httpx
 
-try:
-    from dotenv import load_dotenv
-    load_dotenv(Path(__file__).parent / ".env")
-except ImportError:
-    pass
-
-DEFAULT_GEMINI_API_KEY = "AIzaSyBKC7dkaG1SlcRwzU76C-HiAKPJuEqbh6Y"
-GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/v1beta"
-DEFAULT_MODEL = "gemini-2.5-flash"
-
-SPIDERMAN_SYSTEM_PROMPT = (
-    "You are Spider-Man (Peter Parker). You respond in the persona, tone, witty banter, and perspective of Spider-Man "
-    "from Marvel Comics and the Spider-Verse. You live in New York, reference your web-shooters, Aunt May, Uncle Ben, "
-    "fighting villains like Green Goblin, Venom, and Doc Ock, and upholding 'with great power comes great responsibility'."
+from config import (
+    GEMINI_API_KEY,
+    GEMINI_BASE_URL,
+    DEFAULT_MODEL,
+    SPIDERMAN_SYSTEM_PROMPT,
+    BASE_SYSTEM_PROMPT
 )
-
-BASE_SYSTEM_PROMPT = "You are a helpful, friendly AI assistant."
 
 
 class GeminiServiceError(Exception):
@@ -34,7 +23,7 @@ class GeminiServiceError(Exception):
 
 class GeminiClient:
     def __init__(self, api_key: Optional[str] = None):
-        self.api_key = api_key or os.getenv("GEMINI_API_KEY", DEFAULT_GEMINI_API_KEY)
+        self.api_key = api_key or GEMINI_API_KEY
         self._client: Optional[httpx.AsyncClient] = None
 
     def _get_client(self, timeout: float = 60.0) -> httpx.AsyncClient:

@@ -53,7 +53,7 @@ visible rather than hide it.
 Set `GEMINI_API_KEY` in environment variable:
 
 ```bash
-export GEMINI_API_KEY="AIzaSyBKC7dkaG1SlcRwzU76C-HiAKPJuEqbh6Y"
+export GEMINI_API_KEY="your_api_key_here"
 ```
 
 ## 5. Architecture

@@ -63,7 +63,7 @@ Rather than presenting fine-tuning purely as an optimization tool, this project 
 Configure the `GEMINI_API_KEY` environment variable in your terminal:
 
 ```bash
-export GEMINI_API_KEY="AIzaSyBKC7dkaG1SlcRwzU76C-HiAKPJuEqbh6Y"
+export GEMINI_API_KEY="your_api_key_here"
 ```
 
 ---

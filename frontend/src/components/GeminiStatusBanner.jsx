@@ -31,7 +31,7 @@ export default function GeminiStatusBanner({ health, onRetry }) {
                 <Terminal className="w-3.5 h-3.5 text-red-400" />
                 <span>Configure environment variable:</span>
               </div>
-              <code className="text-red-300">export GEMINI_API_KEY="AIzaSyBKC7dkaG1SlcRwzU76C-HiAKPJuEqbh6Y"</code>
+              <code className="text-red-300">export GEMINI_API_KEY="your_api_key_here"</code>
             </div>
           </div>
         </div>
