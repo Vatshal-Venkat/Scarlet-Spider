@@ -3,15 +3,14 @@
 **Owner:** Tarun Kappala
 **Status:** Ready for build
 **Target IDE:** Antigravity
-**Model:** Qwen2.5-1.5B-Instruct, QLoRA fine-tuned (Run B), served as GGUF via Ollama
+**Model:** Spider-Man Persona & Base Assistant powered by Google Gemini API (`gemini-2.5-flash`)
 
 ---
 
 ## 1. Purpose
 
-Serve a locally fine-tuned small language model through a web app, so the
-model produced in Colab can be demonstrated interactively and its known
-limitations can be observed rather than described.
+Serve a fine-tuned / persona-guided small language model assistant through a web app, so the
+model can be demonstrated interactively and its known limitations can be observed rather than described.
 
 This is the deployment half of a fine-tuning assignment. The model is
 already trained. Nothing in this document involves training.
@@ -35,10 +34,10 @@ visible rather than hide it.
 ## 3. Scope
 
 ### In scope
-- Local Ollama serving of the Run B GGUF
+- Google Gemini API integration for model serving (`gemini-2.5-flash`)
 - FastAPI backend exposing a chat endpoint
 - Single-page web frontend
-- Side-by-side comparison mode (tuned vs base Qwen2.5-1.5B)
+- Side-by-side comparison mode (tuned vs base assistant)
 - Static metrics page rendering the results table and loss curves
 
 ### Out of scope
@@ -49,49 +48,13 @@ visible rather than hide it.
 
 ## 4. Prerequisites
 
-### 4.1 Install Ollama
+### 4.1 Configure Gemini API Key
 
-Not currently installed. Install before anything else.
-
-**Windows:** download the installer from `https://ollama.com/download` and run
-it. Ollama registers as a background service and starts automatically on
-`http://localhost:11434`.
-
-**Verify:**
-```bash
-ollama --version
-curl http://localhost:11434
-```
-The curl should return `Ollama is running`.
-
-### 4.2 Register the fine-tuned model
-
-Place `qwen2.5-1.5b-instruct.Q4_K_M.gguf` and `Modelfile` in the same folder.
-
-`Modelfile`:
-```
-FROM ./qwen2.5-1.5b-instruct.Q4_K_M.gguf
-PARAMETER temperature 0.7
-PARAMETER top_p 0.9
-SYSTEM """You are a knowledgeable assistant that answers questions about Spider-Man across comics, films, games and television. Answer accurately and concisely. If you are not sure, say so instead of guessing."""
-```
-
-The SYSTEM string must match the training data exactly. Every training example
-carried this prompt; changing it at inference shifts behaviour away from what
-was measured.
+Set `GEMINI_API_KEY` in environment variable:
 
 ```bash
-ollama create spiderman -f Modelfile
-ollama pull qwen2.5:1.5b        # untuned base, for comparison mode
-ollama list
+export GEMINI_API_KEY="AIzaSyBKC7dkaG1SlcRwzU76C-HiAKPJuEqbh6Y"
 ```
-
-Both `spiderman:latest` and `qwen2.5:1.5b` must appear.
-
-### 4.3 Hardware
-
-RTX 3050 6 GB, 24 GB system RAM. A 1 GB Q4_K_M model loads with large margin.
-Both models can be resident simultaneously (~2 GB total).
 
 ## 5. Architecture
 
@@ -102,14 +65,14 @@ Browser (localhost:5173)
 FastAPI (localhost:8000)
     |  POST /api/chat
     v
-Ollama (localhost:11434)
+Google Gemini API (gemini-2.5-flash)
     |
-    +-- spiderman:latest   (fine-tuned, Run B)
-    +-- qwen2.5:1.5b       (base, comparison)
+    +-- spiderman model    (fine-tuned persona, Run B)
+    +-- base model         (general assistant, comparison)
 ```
 
 The backend exists to hold the model-selection logic, the comparison
-fan-out, and CORS handling. The frontend never calls Ollama directly.
+fan-out, and CORS handling. The frontend never calls Gemini API directly.
 
 ## 6. Backend requirements
 

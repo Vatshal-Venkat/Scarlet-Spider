@@ -2,22 +2,22 @@ from unittest.mock import AsyncMock, patch
 from main import app
 
 def test_health_endpoint_healthy(client):
-    """Test /api/health returns 200 OK when Ollama is running and both models are available."""
+    """Test /api/health returns 200 OK when Gemini API is connected and both models are available."""
     mock_health = (True, {"spiderman": True, "base": True})
-    with patch("main.ollama_client.check_health", new_callable=AsyncMock) as mock_check:
+    with patch("main.gemini_client.check_health", new_callable=AsyncMock) as mock_check:
         mock_check.return_value = mock_health
         response = client.get("/api/health")
         assert response.status_code == 200
         data = response.json()
         assert data["status"] == "ok"
-        assert data["ollama_reachable"] is True
+        assert data["gemini_reachable"] is True
         assert data["models_available"]["spiderman"] is True
         assert data["models_available"]["base"] is True
 
 def test_health_endpoint_missing_model(client):
     """Test /api/health returns 503 Service Unavailable when a model is missing."""
     mock_health = (True, {"spiderman": True, "base": False})
-    with patch("main.ollama_client.check_health", new_callable=AsyncMock) as mock_check:
+    with patch("main.gemini_client.check_health", new_callable=AsyncMock) as mock_check:
         mock_check.return_value = mock_health
         response = client.get("/api/health")
         assert response.status_code == 503
@@ -25,13 +25,14 @@ def test_health_endpoint_missing_model(client):
         assert data["status"] == "degraded"
         assert data["models_available"]["base"] is False
 
-def test_health_endpoint_ollama_down(client):
-    """Test /api/health returns 503 Service Unavailable when Ollama is unreachable."""
+def test_health_endpoint_gemini_down(client):
+    """Test /api/health returns 503 Service Unavailable when Gemini API is unreachable."""
     mock_health = (False, {"spiderman": False, "base": False})
-    with patch("main.ollama_client.check_health", new_callable=AsyncMock) as mock_check:
+    with patch("main.gemini_client.check_health", new_callable=AsyncMock) as mock_check:
         mock_check.return_value = mock_health
         response = client.get("/api/health")
         assert response.status_code == 503
         data = response.json()
         assert data["status"] == "down"
-        assert data["ollama_reachable"] is False
+        assert data["gemini_reachable"] is False
+

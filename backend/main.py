@@ -13,20 +13,20 @@ from pydantic import ValidationError
 sys.path.insert(0, str(Path(__file__).parent))
 
 from models import ChatRequest, ChatResponse, LatencyMs, HealthResponse
-from ollama_client import OllamaClient, OllamaServiceError
+from gemini_client import GeminiClient, GeminiServiceError
 
 from contextlib import asynccontextmanager
 
-ollama_client = OllamaClient()
+gemini_client = GeminiClient()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     yield
-    await ollama_client.aclose()
+    await gemini_client.aclose()
 
 app = FastAPI(
     title="Spider-Man SLM Assistant API",
-    description="Backend API for serving fine-tuned Qwen 2.5 1.5B Spider-Man model and comparison with base model.",
+    description="Backend API for serving Gemini-powered Spider-Man model and comparison with base model.",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -47,8 +47,8 @@ if DATA_DIR.exists():
     app.mount("/data", StaticFiles(directory=str(DATA_DIR)), name="data")
 
 
-@app.exception_handler(OllamaServiceError)
-async def ollama_service_error_handler(request: Request, exc: OllamaServiceError):
+@app.exception_handler(GeminiServiceError)
+async def gemini_service_error_handler(request: Request, exc: GeminiServiceError):
     return JSONResponse(
         status_code=exc.status_code,
         content={"detail": exc.message}
@@ -68,12 +68,13 @@ async def validation_error_handler(request: Request, exc: RequestValidationError
 
 @app.get("/api/health", response_model=HealthResponse)
 async def get_health():
-    reachable, models = await ollama_client.check_health()
+    reachable, models = await gemini_client.check_health()
     all_present = reachable and models.get("spiderman", False) and models.get("base", False)
     
     overall_status = "ok" if all_present else ("degraded" if reachable else "down")
     response_content = {
         "status": overall_status,
+        "gemini_reachable": reachable,
         "ollama_reachable": reachable,
         "models_available": models
     }
@@ -141,7 +142,7 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
         all_quotes_text = get_all_dialogues_formatted()
 
         if request_data.compare:
-            base_text, base_ms = await ollama_client.generate_single("base", request_data.message)
+            base_text, base_ms = await gemini_client.generate_single("base", request_data.message)
             return ChatResponse(
                 tuned=all_quotes_text,
                 base=base_text,
@@ -162,7 +163,7 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
     # 3. Comparison Mode
     if request_data.compare:
         if is_spidey_prompt:
-            result = await ollama_client.generate_compare(request_data.message, history=history_list)
+            result = await gemini_client.generate_compare(request_data.message, history=history_list)
             return ChatResponse(
                 tuned=result["tuned"],
                 base=result["base"],
@@ -173,7 +174,7 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
             )
         else:
             # Fine-tuned model refuses non-Spider-Man query; Untuned base model answers normally
-            base_text, base_ms = await ollama_client.generate_single("base", request_data.message, history=history_list)
+            base_text, base_ms = await gemini_client.generate_single("base", request_data.message, history=history_list)
             return ChatResponse(
                 tuned=REFUSAL_MESSAGE,
                 base=base_text,
@@ -201,11 +202,11 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
     accept_header = request.headers.get("accept", "")
     if stream or "text/event-stream" in accept_header:
         return StreamingResponse(
-            ollama_client.stream_single(request_data.model, request_data.message, history=history_list),
+            gemini_client.stream_single(request_data.model, request_data.message, history=history_list),
             media_type="text/event-stream"
         )
 
-    resp_text, latency = await ollama_client.generate_single(request_data.model, request_data.message, history=history_list)
+    resp_text, latency = await gemini_client.generate_single(request_data.model, request_data.message, history=history_list)
     if request_data.model == "spiderman":
         return ChatResponse(
             tuned=resp_text,

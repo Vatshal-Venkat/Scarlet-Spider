@@ -4,21 +4,21 @@ import { Sparkles, Activity, MessageSquare } from 'lucide-react';
 import ChatView from './components/ChatView';
 import MetricsView from './components/MetricsView';
 import DisclaimerBanner from './components/DisclaimerBanner';
-import OllamaStatusBanner from './components/OllamaStatusBanner';
+import GeminiStatusBanner from './components/GeminiStatusBanner';
 import { fetchHealth } from './api';
 
 export default function App() {
   const [health, setHealth] = useState(null);
   const location = useLocation();
 
-  const checkOllamaHealth = async () => {
+  const checkHealth = async () => {
     const res = await fetchHealth();
     setHealth(res);
   };
 
   useEffect(() => {
-    checkOllamaHealth();
-    const interval = setInterval(checkOllamaHealth, 15000);
+    checkHealth();
+    const interval = setInterval(checkHealth, 15000);
     return () => clearInterval(interval);
   }, []);
 
@@ -27,8 +27,8 @@ export default function App() {
       {/* 1. Mandatory Persistent Disclaimer Banner */}
       <DisclaimerBanner />
 
-      {/* 2. Ollama Setup Error Banner (if degraded/down) */}
-      <OllamaStatusBanner health={health} onRetry={checkOllamaHealth} />
+      {/* 2. Gemini Status Error Banner (if degraded/down) */}
+      <GeminiStatusBanner health={health} onRetry={checkHealth} />
 
       {/* 3. Sleek Matte Black Header Navbar */}
       <header className="bg-[#09090b]/95 border-b border-zinc-800/80 sticky top-0 z-40 backdrop-blur-md">

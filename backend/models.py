@@ -42,5 +42,6 @@ class ChatResponse(BaseModel):
 
 class HealthResponse(BaseModel):
     status: str
-    ollama_reachable: bool
+    gemini_reachable: bool = True
+    ollama_reachable: Optional[bool] = True
     models_available: Dict[str, bool]

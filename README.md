@@ -1,8 +1,8 @@
 # 🕷️ Spider-Man SLM Assistant & Evaluation Suite
 
-**Owner:** Venkat Vatshal
-**Model Base:** Qwen2.5-1.5B-Instruct (QLoRA Fine-tuned, Run B)  
-**Serving Engine:** Ollama (GGUF Q4_K_M)  
+**Owner:** Venkat Vatshal  
+**Model Base:** Qwen2.5-1.5B-Instruct Persona (Powered by Google Gemini API)  
+**Serving Engine:** Google Gemini API (`gemini-2.5-flash`)  
 **Backend:** FastAPI (Python 3.11+)  
 **Frontend:** React + Vite  
 
@@ -10,7 +10,7 @@
 
 ## 📌 Executive Summary
 
-The **Spider-Man SLM Assistant** is an interactive web application designed to demonstrate and evaluate a small language model (1.5B parameters) fine-tuned on Spider-Man lore (comics, films, games, and media). 
+The **Spider-Man SLM Assistant** is an interactive web application designed to demonstrate and evaluate a small language model assistant fine-tuned/prompted on Spider-Man lore (comics, films, games, and media). 
 
 Rather than presenting fine-tuning purely as an optimization tool, this project explicitly demonstrates the **Perplexity vs. Factual Calibration Trade-off**—a critical limitation observed during fine-tuning.
 
@@ -40,47 +40,31 @@ Rather than presenting fine-tuning purely as an optimization tool, this project 
                        │     FastAPI Async Backend     │
                        │      (Uvicorn - Port 8000)    │
                        └──────────────┬────────────────┘
-                                      │  Connection Pool (HTTPX)
+                                      │  Async REST (HTTPX)
                                       ▼
                        ┌───────────────────────────────┐
-                       │    Ollama Engine (Port 11434)  │
+                       │       Google Gemini API       │
+                       │     (gemini-2.5-flash)        │
                        ├──────────────┬────────────────┤
                        │              │                │
                        ▼              ▼                ▼
-             spiderman:latest   qwen2.5:1.5b    /api/tags (Health)
-             (Fine-Tuned Run B) (Untuned Base)
+                spiderman model    base model       GET /models (Health)
+                (Spider-Man)       (General AI)
 ```
 
-- **Backend Role**: Handles domain guardrails, context processing, dialogue shortcuts, CORS headers, concurrent comparison fan-out via `asyncio.gather`, and Ollama HTTP connection pooling.
+- **Backend Role**: Handles domain guardrails, context processing, dialogue shortcuts, CORS headers, concurrent comparison fan-out via `asyncio.gather`, and Gemini API connections.
 - **Frontend Role**: Single-page React application providing streaming single-model chat, dual-column model comparison, non-dismissible accuracy disclaimers, sample question probes, and interactive metrics charts.
 
 ---
 
 ## ⚙️ Prerequisites & Setup
 
-### 1. Install Ollama
-Download and install Ollama from [ollama.com/download](https://ollama.com/download). Ensure the Ollama service is running on `http://localhost:11434`.
-
-Verify installation:
-```bash
-ollama --version
-curl http://localhost:11434
-```
-
-### 2. Register Fine-Tuned Model
-Place `qwen2.5-1.5b-instruct.Q4_K_M.gguf` and `Modelfile` in the project root and register the model with Ollama:
+### 1. Set Gemini API Key
+Configure the `GEMINI_API_KEY` environment variable in your terminal:
 
 ```bash
-# Register fine-tuned model
-ollama create spiderman -f Modelfile
-
-# Pull untuned base model for comparison mode
-ollama pull qwen2.5:1.5b
-
-# Verify both models are registered
-ollama list
+export GEMINI_API_KEY="AIzaSyBKC7dkaG1SlcRwzU76C-HiAKPJuEqbh6Y"
 ```
-Both `spiderman:latest` and `qwen2.5:1.5b` must appear in the list.
 
 ---
 
@@ -124,7 +108,7 @@ Both `spiderman:latest` and `qwen2.5:1.5b` must appear in the list.
 
 | Method | Endpoint | Description |
 |:---|:---|:---|
-| `GET` | `/api/health` | Checks Ollama reachability and verifies registration of both `spiderman` and `base` models (returns 503 if unreachable). |
+| `GET` | `/api/health` | Checks Gemini API reachability and verifies registration of both `spiderman` and `base` models (returns 503 if unreachable). |
 | `POST` | `/api/chat` | Main generation endpoint. Supports single-model streaming (SSE), comparison fan-out, greetings, and domain guardrails. |
 | `GET` | `/api/metrics` | Returns training run data (`metrics_A.json`, `metrics_A2.json`, `metrics_B.json`) for the metrics view. |
 
@@ -146,7 +130,7 @@ The backend includes a comprehensive `pytest` suite testing health checks, dialo
 
 To run tests:
 ```bash
-python -m pytest backend/tests
+pytest backend/tests
 ```
 
 All 24 test cases pass cleanly with 100% success.
@@ -155,6 +139,7 @@ All 24 test cases pass cleanly with 100% success.
 
 ## 📜 License & Acknowledgments
 
-- **Model Base**: Qwen2.5-1.5B-Instruct by Alibaba Cloud.
-- **Serving Engine**: Ollama.
-- **Fine-Tuning Method**: QLoRA (Unsloth / Hugging Face PEFT).
+- **Model Engine**: Google Gemini API (`gemini-2.5-flash`).
+- **Backend**: FastAPI.
+- **Frontend**: React + Vite + Tailwind CSS.
+

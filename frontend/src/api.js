@@ -11,6 +11,7 @@ export async function fetchHealth() {
       status: 503,
       data: {
         status: 'down',
+        gemini_reachable: false,
         ollama_reachable: false,
         models_available: { spiderman: false, base: false }
       }

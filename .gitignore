@@ -19,7 +19,10 @@ model/*.gguf
 
 # Environment & Logs
 .env
-.env.local
+.env.*
+*.env
+backend/.env
+frontend/.env
 *.log
 
 # OS Generated
