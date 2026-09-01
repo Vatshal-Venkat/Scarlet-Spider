@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Spider">
+  <rect width="64" height="64" rx="14" fill="#C1121F"/>
+  <g fill="none" stroke="#0D0D0D" stroke-width="3.6" stroke-linecap="round">
+    <path d="M26 22C19 17 13 12 8 7"/>
+    <path d="M25 25C17 23 11 21 4 19"/>
+    <path d="M25 28C17 29 11 32 5 34"/>
+    <path d="M26 31C19 35 14 41 11 48"/>
+    <path d="M38 22C45 17 51 12 56 7"/>
+    <path d="M39 25C47 23 53 21 60 19"/>
+    <path d="M39 28C47 29 53 32 59 34"/>
+    <path d="M38 31C45 35 50 41 53 48"/>
+  </g>
+  <ellipse cx="32" cy="40" rx="11" ry="14" fill="#0D0D0D"/>
+  <circle cx="32" cy="24" r="8.5" fill="#0D0D0D"/>
+  <circle cx="28.6" cy="22.4" r="2.1" fill="#F5F0EB"/>
+  <circle cx="35.4" cy="22.4" r="2.1" fill="#F5F0EB"/>
+</svg>

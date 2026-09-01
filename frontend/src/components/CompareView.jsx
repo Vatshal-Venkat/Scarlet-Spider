@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles, Bot, Clock, AlertTriangle, ShieldCheck } from 'lucide-react';
+import spiderAvatar from '../assets/spider-avatar.jpeg';
 
 export default function CompareView({ msg }) {
   const { user, tuned, base, latency_ms } = msg;
@@ -19,7 +20,7 @@ export default function CompareView({ msg }) {
         <div className="bg-[#0d0d0f] border border-zinc-800 rounded-2xl p-4.5 flex flex-col shadow-sm">
           <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2.5 mb-3">
             <div className="flex items-center gap-2 text-xs font-semibold text-red-400">
-              <Sparkles className="w-4 h-4 text-red-500" />
+              <img src={spiderAvatar} alt="Spider-Man" className="w-4.5 h-4.5 rounded-md object-cover border border-red-500/50" />
               <span>Fine-Tuned (Run B Qwen2.5)</span>
             </div>
             {latency_ms?.tuned !== undefined && latency_ms?.tuned !== null && (
@@ -43,16 +44,16 @@ export default function CompareView({ msg }) {
 
           <div className="mt-3 pt-2.5 border-t border-zinc-800/80 flex items-center gap-1.5 text-[11px] text-amber-400/90 font-medium">
             <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-            <span>Over-confident & prone to hallucinated details</span>
+            <span>Persona-driven, witty & comics/movie lore-aligned</span>
           </div>
         </div>
 
-        {/* Right Column: Untuned Base Model (qwen2.5:1.5b) */}
+        {/* Right Column: Untuned Base Model (ChatGPT style) */}
         <div className="bg-[#0d0d0f] border border-zinc-800 rounded-2xl p-4.5 flex flex-col shadow-sm">
           <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2.5 mb-3">
             <div className="flex items-center gap-2 text-xs font-semibold text-zinc-300">
               <Bot className="w-4 h-4 text-blue-400" />
-              <span>Untuned Base (Qwen2.5-1.5B)</span>
+              <span>Untuned Base (ChatGPT)</span>
             </div>
             {latency_ms?.base !== undefined && latency_ms?.base !== null && (
               <div className="flex items-center gap-1 text-[11px] text-zinc-300 bg-zinc-800 px-2 py-0.5 rounded font-mono">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Sparkles, Activity, MessageSquare } from 'lucide-react';
+import spiderAvatar from './assets/spider-avatar.jpeg';
 import ChatView from './components/ChatView';
 import MetricsView from './components/MetricsView';
 import GeminiStatusBanner from './components/GeminiStatusBanner';
@@ -30,8 +31,8 @@ export default function App() {
       <header className="bg-[#09090b]/95 border-b border-zinc-800/80 sticky top-0 z-40 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="p-2 bg-red-600 rounded-xl shadow group-hover:bg-red-500 transition-colors border border-red-500/40">
-              <Sparkles className="w-4.5 h-4.5 text-white" />
+            <div className="w-9 h-9 rounded-xl shadow group-hover:scale-105 transition-all border border-red-500/50 overflow-hidden flex items-center justify-center bg-red-950/40 shrink-0">
+              <img src={spiderAvatar} alt="Spider-Man Logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <h1 className="text-sm font-bold tracking-tight text-white flex items-center gap-2">

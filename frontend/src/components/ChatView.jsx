@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Sparkles, Bot, Columns, Loader2, Shield } from 'lucide-react';
+import spiderAvatar from '../assets/spider-avatar.jpeg';
 import SampleQuestions from './SampleQuestions';
 import CompareView from './CompareView';
 import { sendChat } from '../api';
@@ -171,8 +172,8 @@ export default function ChatView() {
           <div className="text-center py-4 max-w-3xl mx-auto">
             {/* Hero Card */}
             <div className="bg-[#0d0d0f] border border-zinc-800/80 rounded-3xl p-6 shadow mb-4 text-center relative overflow-hidden">
-              <div className="inline-flex p-3 bg-red-950/40 text-red-400 rounded-2xl border border-red-800/40 mb-3">
-                <Shield className="w-7 h-7" />
+              <div className="w-14 h-14 rounded-2xl overflow-hidden border border-red-500/50 shadow-lg mx-auto mb-3 bg-red-950/40">
+                <img src={spiderAvatar} alt="Spider-Man" className="w-full h-full object-cover" />
               </div>
               <h2 className="text-2xl font-bold text-white tracking-tight">
                 Spider-Man AI Assistant
@@ -204,13 +205,13 @@ export default function ChatView() {
                       <span className="flex items-center gap-1.5">
                         {msg.modelUsed === 'spiderman' ? (
                           <span className="text-red-400 flex items-center gap-1.5">
-                            <Shield className="w-4 h-4 text-red-500" />
+                            <img src={spiderAvatar} alt="Spider-Man" className="w-4.5 h-4.5 rounded-md object-cover border border-red-500/50" />
                             Fine-Tuned Spider-Man SLM
                           </span>
                         ) : (
                           <span className="text-blue-400 flex items-center gap-1.5">
                             <Bot className="w-4 h-4 text-blue-400" />
-                            Untuned Base Qwen2.5
+                            Untuned Base (ChatGPT)
                           </span>
                         )}
                       </span>
