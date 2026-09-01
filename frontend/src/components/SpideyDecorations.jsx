@@ -33,7 +33,7 @@ export default function SpideyDecorations() {
             filter: brightness(0);
           }
           17% {
-            opacity: 0.7;
+            opacity: 0.6;
             filter: brightness(1.3);
           }
           19% {
@@ -66,7 +66,7 @@ export default function SpideyDecorations() {
         aria-hidden="true"
         style={{
           position: "fixed",
-          bottom: "20px",
+          bottom: "40px",
           left: "12px",
           width: "190px",
           maxWidth: "14vw",
@@ -80,20 +80,18 @@ export default function SpideyDecorations() {
         }}
       />
 
-      {/* 2. Right-Top: Spotlight showing full ground light reflection, blinking every 7s */}
+      {/* 2. Right-Top: Small Spotlight scene blinking once every 7s */}
       <img
         src="/spidey/spidey-spotlight.jpeg"
         alt="Spotlight Scene"
         aria-hidden="true"
         style={{
           position: "fixed",
-          top: "56px",
+          top: "60px",
           right: "20px",
-          height: "82vh",
-          maxHeight: "85vh",
-          width: "auto",
-          maxWidth: "18vw",
-          objectFit: "contain",
+          width: "175px",
+          maxWidth: "16vw",
+          height: "auto",
           zIndex: 5,
           pointerEvents: "none",
           mixBlendMode: "screen",
