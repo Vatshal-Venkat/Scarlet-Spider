@@ -26,8 +26,8 @@ export default function SpideyDecorations() {
           }
         }
 
-        /* 2. Top right spotlight blinking once every 5s with realistic lamp flicker */
-        @keyframes spotlightBlink5s {
+        /* 2. Top right spotlight blinking once every 7s with full ground light reflection */
+        @keyframes spotlightBlink7s {
           0%, 15% {
             opacity: 0;
             filter: brightness(0);
@@ -44,15 +44,15 @@ export default function SpideyDecorations() {
             opacity: 1;
             filter: brightness(1.1);
           }
-          55% {
+          50% {
             opacity: 0.95;
             filter: brightness(1.0);
           }
-          58% {
-            opacity: 0.3;
-            filter: brightness(0.6);
+          53% {
+            opacity: 0.25;
+            filter: brightness(0.5);
           }
-          60%, 100% {
+          55%, 100% {
             opacity: 0;
             filter: brightness(0);
           }
@@ -80,23 +80,25 @@ export default function SpideyDecorations() {
         }}
       />
 
-      {/* 2. Right-Top: Spotlight blinking once every 5 seconds */}
+      {/* 2. Right-Top: Spotlight showing full ground light reflection, blinking every 7s */}
       <img
         src="/spidey/spidey-spotlight.jpeg"
         alt="Spotlight Scene"
         aria-hidden="true"
         style={{
           position: "fixed",
-          top: "60px",
+          top: "56px",
           right: "20px",
-          width: "175px",
-          maxWidth: "16vw",
-          height: "auto",
+          height: "82vh",
+          maxHeight: "85vh",
+          width: "auto",
+          maxWidth: "18vw",
+          objectFit: "contain",
           zIndex: 5,
           pointerEvents: "none",
           mixBlendMode: "screen",
           willChange: "opacity, filter",
-          animation: !reducedMotion ? "spotlightBlink5s 5s ease-in-out infinite" : "none",
+          animation: !reducedMotion ? "spotlightBlink7s 7s ease-in-out infinite" : "none",
         }}
       />
     </>
