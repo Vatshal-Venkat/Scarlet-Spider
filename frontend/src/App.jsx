@@ -3,7 +3,6 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Sparkles, Activity, MessageSquare } from 'lucide-react';
 import ChatView from './components/ChatView';
 import MetricsView from './components/MetricsView';
-import DisclaimerBanner from './components/DisclaimerBanner';
 import GeminiStatusBanner from './components/GeminiStatusBanner';
 import { fetchHealth } from './api';
 
@@ -24,10 +23,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#09090b] text-zinc-100 selection:bg-red-600 selection:text-white">
-      {/* 1. Mandatory Persistent Disclaimer Banner */}
-      <DisclaimerBanner />
-
-      {/* 2. Gemini Status Error Banner (if degraded/down) */}
+      {/* Gemini Status Error Banner (if degraded/down) */}
       <GeminiStatusBanner health={health} onRetry={checkHealth} />
 
       {/* 3. Sleek Matte Black Header Navbar */}
