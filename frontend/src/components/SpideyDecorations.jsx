@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 export default function SpideyDecorations() {
   const reducedMotion =
@@ -66,10 +66,10 @@ export default function SpideyDecorations() {
         aria-hidden="true"
         style={{
           position: "fixed",
-          bottom: "15px",
-          left: "15px",
-          width: "270px",
-          maxWidth: "20vw",
+          bottom: "20px",
+          left: "12px",
+          width: "190px",
+          maxWidth: "14vw",
           height: "auto",
           zIndex: 5,
           pointerEvents: "none",
