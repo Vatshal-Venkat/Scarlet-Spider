@@ -92,7 +92,7 @@ export default function SpideyDecorations() {
         aria-hidden="true"
         style={{
           position: "fixed",
-          top: "50px",
+          top: "60px",
           right: "15px",
           width: "210px",
           maxWidth: "16vw",
@@ -126,65 +126,6 @@ export default function SpideyDecorations() {
             filter: "drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6))",
           }}
         />
-
-        {/* Cowboy wind / dust swirl effect near grounded leg */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            bottom: "4px",
-            right: "10px",
-            width: "45px",
-            height: "18px",
-            overflow: "visible",
-            pointerEvents: "none",
-          }}
-        >
-          {/* Dust swirl wisp 1 */}
-          <svg
-            viewBox="0 0 60 20"
-            style={{
-              position: "absolute",
-              bottom: "2px",
-              right: "4px",
-              width: "30px",
-              height: "10px",
-              animation: !reducedMotion ? "cowboyDustDrift 3.2s ease-out infinite" : "none",
-            }}
-          >
-            <path
-              d="M50,15 Q35,8 20,12 T5,8"
-              fill="none"
-              stroke="rgba(230, 205, 175, 0.5)"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-            />
-            <circle cx="16" cy="11" r="2.2" fill="rgba(230, 200, 170, 0.35)" />
-            <circle cx="28" cy="14" r="1.6" fill="rgba(230, 200, 170, 0.3)" />
-          </svg>
-
-          {/* Dust swirl wisp 2 */}
-          <svg
-            viewBox="0 0 50 16"
-            style={{
-              position: "absolute",
-              bottom: "0px",
-              right: "8px",
-              width: "25px",
-              height: "8px",
-              animation: !reducedMotion ? "cowboyDustDrift2 2.6s ease-out 1.3s infinite" : "none",
-            }}
-          >
-            <path
-              d="M40,12 Q28,5 15,9 T2,6"
-              fill="none"
-              stroke="rgba(230, 205, 175, 0.4)"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-            />
-            <circle cx="12" cy="8" r="1.8" fill="rgba(230, 200, 170, 0.28)" />
-          </svg>
-        </div>
       </div>
     </>
   );
