@@ -109,7 +109,7 @@ export default function SpideyDecorations() {
           position: "fixed",
           bottom: "10px",
           right: "15px",
-          width: "108px",
+          width: "128px",
           maxWidth: "8.5vw",
           zIndex: 5,
           pointerEvents: "none",
