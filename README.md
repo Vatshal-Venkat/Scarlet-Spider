@@ -1,6 +1,6 @@
 # 🕷️ Spider-Man SLM Assistant & Evaluation Suite
 
-**Owner:** Tarun Kappala  
+**Owner:** Venkat Vatshal
 **Model Base:** Qwen2.5-1.5B-Instruct (QLoRA Fine-tuned, Run B)  
 **Serving Engine:** Ollama (GGUF Q4_K_M)  
 **Backend:** FastAPI (Python 3.11+)  
