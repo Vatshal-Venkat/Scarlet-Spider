@@ -4,6 +4,7 @@ import spiderAvatar from '../assets/spider-sense-transparent.png';
 import SampleQuestions from './SampleQuestions';
 import CompareView from './CompareView';
 import MarkdownRenderer from './MarkdownRenderer';
+import { useSpidey } from '../SpideyContext';
 import { sendChat } from '../api';
 
 export default function ChatView() {
@@ -15,6 +16,16 @@ export default function ChatView() {
   const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
+  const baseInputRef = useRef('');
+  const firstChunkFired = useRef(false);
+
+  const {
+    setChatState,
+    setMessageCount,
+    fireSwingLike,
+    fireStreamingStarted,
+    fireInferenceError,
+  } = useSpidey();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -33,13 +44,12 @@ export default function ChatView() {
       recognition.lang = 'en-US';
 
       recognition.onresult = (event) => {
-        let transcript = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          transcript += event.results[i][0].transcript;
+        let sessionTranscript = '';
+        for (let i = 0; i < event.results.length; i++) {
+          sessionTranscript += event.results[i][0].transcript;
         }
-        if (transcript) {
-          setInput((prev) => (prev ? `${prev} ${transcript}` : transcript));
-        }
+        const base = baseInputRef.current;
+        setInput(base ? `${base} ${sessionTranscript}` : sessionTranscript);
       };
 
       recognition.onerror = (event) => {
@@ -65,6 +75,7 @@ export default function ChatView() {
       setIsListening(false);
     } else {
       try {
+        baseInputRef.current = input.trim();
         recognitionRef.current.start();
         setIsListening(true);
       } catch (err) {
@@ -80,6 +91,8 @@ export default function ChatView() {
     setInput('');
     setError(null);
     setLoading(true);
+    setChatState('generating');
+    firstChunkFired.current = false;
 
     const isCompare = mode === 'compare';
     const newMsgIndex = messages.length;
@@ -167,6 +180,11 @@ export default function ChatView() {
           compare: false,
           history: historyPayload,
           onChunk: (accumulatedText) => {
+            // Fire spider-sense on very first chunk
+            if (!firstChunkFired.current) {
+              firstChunkFired.current = true;
+              fireStreamingStarted();
+            }
             setMessages((prev) => {
               const updated = [...prev];
               if (mode === 'spiderman') {
@@ -180,6 +198,9 @@ export default function ChatView() {
         });
 
         const elapsed = Date.now() - startTime;
+        // Fire swing-like on fast response (< 800ms)
+        if (elapsed < 800) fireSwingLike();
+
         setMessages((prev) => {
           const updated = [...prev];
           if (updated[newMsgIndex]) {
@@ -194,6 +215,7 @@ export default function ChatView() {
     } catch (err) {
       const errMsg = err.message || 'Failed to generate response.';
       setError(errMsg);
+      fireInferenceError();
       setMessages((prev) => {
         const updated = [...prev];
         if (updated[newMsgIndex]) {
@@ -211,6 +233,9 @@ export default function ChatView() {
       });
     } finally {
       setLoading(false);
+      const newCount = messages.length + 1;
+      setMessageCount(newCount);
+      setChatState(newCount === 0 ? 'idle' : 'active');
     }
   };
 

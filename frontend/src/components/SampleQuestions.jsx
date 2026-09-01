@@ -15,7 +15,7 @@ export default function SampleQuestions({ onSelectQuestion }) {
       title: "Villains & Allies",
       icon: Sparkles,
       prompts: [
-        "Who is Venom and how was he created?",
+        "What is Venom and how was it created?",
         "How did Norman Osborn become the Green Goblin?"
       ]
     },

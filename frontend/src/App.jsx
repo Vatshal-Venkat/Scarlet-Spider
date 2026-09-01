@@ -5,11 +5,23 @@ import spiderAvatar from './assets/spider-sense-transparent.png';
 import ChatView from './components/ChatView';
 import MetricsView from './components/MetricsView';
 import GeminiStatusBanner from './components/GeminiStatusBanner';
+import SpideyDecorations from './components/SpideyDecorations';
+import { useSpidey } from './SpideyContext';
 import { fetchHealth } from './api';
 
 export default function App() {
   const [health, setHealth] = useState(null);
   const location = useLocation();
+  const isMetricsTab = location.pathname === '/metrics';
+
+  const {
+    chatState,
+    messageCount,
+    triggerSwingLike,
+    consumeSwingLike,
+    streamingStarted,
+    inferenceError,
+  } = useSpidey();
 
   const checkHealth = async () => {
     const res = await fetchHealth();
@@ -24,6 +36,15 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#09090b] text-zinc-100 selection:bg-red-600 selection:text-white">
+      <SpideyDecorations
+        chatState={chatState}
+        isMetricsTab={isMetricsTab}
+        messageCount={messageCount}
+        triggerSwingLike={triggerSwingLike}
+        onSwingLikeConsumed={consumeSwingLike}
+        streamingStarted={streamingStarted}
+        inferenceError={inferenceError}
+      />
       {/* Gemini Status Error Banner (if degraded/down) */}
       <GeminiStatusBanner health={health} onRetry={checkHealth} />
 
