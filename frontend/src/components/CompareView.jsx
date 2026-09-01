@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sparkles, Bot, Clock, AlertTriangle, ShieldCheck } from 'lucide-react';
 import spiderAvatar from '../assets/spider-sense-transparent.png';
+import MarkdownRenderer from './MarkdownRenderer';
 
 export default function CompareView({ msg }) {
   const { user, tuned, base, latency_ms } = msg;
@@ -20,7 +21,7 @@ export default function CompareView({ msg }) {
         <div className="bg-[#0d0d0f] border border-zinc-800 rounded-2xl p-4.5 flex flex-col shadow-sm">
           <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2.5 mb-3">
             <div className="flex items-center gap-2 text-xs font-semibold text-red-400">
-              <img src={spiderAvatar} alt="Spider-Man" className="w-4.5 h-4.5 rounded-md object-cover border border-red-500/50" />
+              <img src={spiderAvatar} alt="Spider-Man" className="w-4 h-4 object-contain" style={{ transform: 'rotate(-10deg)' }} />
               <span>Fine-Tuned (Run B Qwen2.5)</span>
             </div>
             {latency_ms?.tuned !== undefined && latency_ms?.tuned !== null && (
@@ -31,9 +32,9 @@ export default function CompareView({ msg }) {
             )}
           </div>
 
-          <div className="text-sm text-zinc-100 leading-relaxed whitespace-pre-wrap flex-1">
+          <div className="text-sm text-zinc-100 leading-relaxed flex-1">
             {tuned ? (
-              tuned
+              <MarkdownRenderer content={tuned} />
             ) : (
               <div className="flex items-center gap-2 text-zinc-500 text-xs italic py-4">
                 <div className="w-2 h-2 rounded-full bg-red-500 animate-ping"></div>
@@ -63,9 +64,9 @@ export default function CompareView({ msg }) {
             )}
           </div>
 
-          <div className="text-sm text-zinc-300 leading-relaxed whitespace-pre-wrap flex-1">
+          <div className="text-sm text-zinc-300 leading-relaxed flex-1">
             {base ? (
-              base
+              <MarkdownRenderer content={base} />
             ) : (
               <div className="flex items-center gap-2 text-zinc-500 text-xs italic py-4">
                 <div className="w-2 h-2 rounded-full bg-blue-400 animate-ping"></div>

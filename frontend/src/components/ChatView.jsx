@@ -3,6 +3,7 @@ import { Send, Sparkles, Bot, Columns, Loader2, Shield } from 'lucide-react';
 import spiderAvatar from '../assets/spider-sense-transparent.png';
 import SampleQuestions from './SampleQuestions';
 import CompareView from './CompareView';
+import MarkdownRenderer from './MarkdownRenderer';
 import { sendChat } from '../api';
 
 export default function ChatView() {
@@ -222,8 +223,8 @@ export default function ChatView() {
           <div className="text-center py-4 max-w-3xl mx-auto">
             {/* Hero Card */}
             <div className="bg-[#0d0d0f] border border-zinc-800/80 rounded-3xl p-6 shadow mb-4 text-center relative overflow-hidden">
-              <div className="w-14 h-14 rounded-2xl overflow-hidden border border-red-500/50 shadow-lg mx-auto mb-3 bg-red-950/40">
-                <img src={spiderAvatar} alt="Spider-Man" className="w-full h-full object-cover" />
+              <div className="w-12 h-12 mx-auto mb-3 shrink-0">
+                <img src={spiderAvatar} alt="Spider-Man" className="w-full h-full object-contain drop-shadow-lg" style={{ transform: 'rotate(-12deg)' }} />
               </div>
               <h2 className="text-2xl font-bold text-white tracking-tight">
                 Spider-Man AI Assistant
@@ -255,7 +256,7 @@ export default function ChatView() {
                       <span className="flex items-center gap-1.5">
                         {msg.modelUsed === 'spiderman' ? (
                           <span className="text-red-400 flex items-center gap-1.5">
-                            <img src={spiderAvatar} alt="Spider-Man" className="w-4.5 h-4.5 rounded-md object-cover border border-red-500/50" />
+                            <img src={spiderAvatar} alt="Spider-Man" className="w-4 h-4 object-contain" style={{ transform: 'rotate(-10deg)' }} />
                             Fine-Tuned Spider-Man SLM
                           </span>
                         ) : (
@@ -272,14 +273,15 @@ export default function ChatView() {
                       ) : null}
                     </div>
 
-                    <div className="leading-relaxed whitespace-pre-wrap text-zinc-100">
-                      {msg.modelUsed === 'spiderman' ? msg.tuned : msg.base}
-                      {!msg.tuned && !msg.base && loading && (
+                    <div className="leading-relaxed">
+                      {(msg.modelUsed === 'spiderman' ? msg.tuned : msg.base) ? (
+                        <MarkdownRenderer content={msg.modelUsed === 'spiderman' ? msg.tuned : msg.base} />
+                      ) : loading ? (
                         <span className="flex items-center gap-2 text-zinc-500 text-xs italic py-1">
                           <Loader2 className="w-3.5 h-3.5 animate-spin text-red-500" />
                           Generating response...
                         </span>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                 </div>

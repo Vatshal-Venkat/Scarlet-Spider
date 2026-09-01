@@ -31,8 +31,8 @@ export default function App() {
       <header className="bg-[#09090b]/95 border-b border-zinc-800/80 sticky top-0 z-40 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl shadow group-hover:scale-105 transition-all border border-red-500/50 overflow-hidden flex items-center justify-center bg-red-950/40 shrink-0">
-              <img src={spiderAvatar} alt="Spider-Man Logo" className="w-full h-full object-cover" />
+            <div className="w-9 h-9 shrink-0">
+              <img src={spiderAvatar} alt="Spider-Man Logo" className="w-full h-full object-contain drop-shadow-md" style={{ transform: 'rotate(-10deg)' }} />
             </div>
             <div>
               <h1 className="text-sm font-bold tracking-tight text-white flex items-center gap-2">

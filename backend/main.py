@@ -203,7 +203,12 @@ async def chat_endpoint(request_data: ChatRequest, request: Request, stream: boo
     if stream or "text/event-stream" in accept_header:
         return StreamingResponse(
             gemini_client.stream_single(request_data.model, request_data.message, history=history_list),
-            media_type="text/event-stream"
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no"
+            }
         )
 
     resp_text, latency = await gemini_client.generate_single(request_data.model, request_data.message, history=history_list)

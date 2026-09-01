@@ -63,13 +63,15 @@ export async function sendChat({ message, model = 'spiderman', compare = false, 
   const reader = res.body.getReader();
   const decoder = new TextDecoder('utf-8');
   let fullText = '';
+  let buffer = '';
 
   while (true) {
     const { done, value } = await reader.read();
     if (done) break;
     
-    const chunk = decoder.decode(value, { stream: true });
-    const lines = chunk.split('\n');
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop(); // Hold onto partial line until next chunk arrives
     
     for (const line of lines) {
       if (line.startsWith('data: ')) {
@@ -80,7 +82,7 @@ export async function sendChat({ message, model = 'spiderman', compare = false, 
           if (parsed.error) {
             throw new Error(parsed.error);
           }
-          if (parsed.token) {
+          if (parsed.token !== undefined) {
             fullText += parsed.token;
             if (onChunk) onChunk(fullText);
           }
@@ -90,6 +92,19 @@ export async function sendChat({ message, model = 'spiderman', compare = false, 
           }
         }
       }
+    }
+  }
+
+  if (buffer.trim().startsWith('data: ')) {
+    const jsonStr = buffer.trim().slice(6).trim();
+    if (jsonStr) {
+      try {
+        const parsed = JSON.parse(jsonStr);
+        if (parsed.token) {
+          fullText += parsed.token;
+          if (onChunk) onChunk(fullText);
+        }
+      } catch (e) {}
     }
   }
 
