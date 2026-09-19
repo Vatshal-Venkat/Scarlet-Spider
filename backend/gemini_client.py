@@ -10,7 +10,8 @@ from config import (
     GEMINI_BASE_URL,
     DEFAULT_MODEL,
     SPIDERMAN_SYSTEM_PROMPT,
-    BASE_SYSTEM_PROMPT
+    BASE_SYSTEM_PROMPT,
+    RATE_LIMIT_MESSAGE
 )
 
 
@@ -116,6 +117,8 @@ class GeminiClient:
                 except Exception:
                     err_msg = "Invalid Gemini API key or unauthorized request."
                 raise GeminiServiceError(f"Gemini API Error ({res.status_code}): {err_msg}", status_code=503)
+            if res.status_code == 429:
+                return RATE_LIMIT_MESSAGE, elapsed_ms
             if res.status_code != 200:
                 raise GeminiServiceError(f"Gemini API returned status {res.status_code}: {res.text}", status_code=503)
 
@@ -165,6 +168,9 @@ class GeminiClient:
             client = self._get_client()
             req_timeout = httpx.Timeout(timeout, connect=15.0, read=timeout, write=30.0)
             async with client.stream("POST", url, json=payload, timeout=req_timeout) as response:
+                if response.status_code == 429:
+                    yield f"data: {json.dumps({'token': RATE_LIMIT_MESSAGE, 'done': True})}\n\n"
+                    return
                 if response.status_code != 200:
                     try:
                         err_bytes = await response.aread()

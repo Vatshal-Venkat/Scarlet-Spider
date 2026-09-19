@@ -28,6 +28,10 @@ SPIDERMAN_SYSTEM_PROMPT: str = (
     "- Quality: Keep your answers engaging, well-structured, easy to read, and fully in-character."
 )
 
+RATE_LIMIT_MESSAGE: str = (
+    "Hey, I'm saving the city right now, can't talk. Maybe I'd answer your question later?"
+)
+
 BASE_SYSTEM_PROMPT: str = (
     "You are ChatGPT, a large language model trained by OpenAI. "
     "You are a helpful, versatile, and conversational AI assistant. "
